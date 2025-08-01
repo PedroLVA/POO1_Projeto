@@ -1,3 +1,4 @@
+![Alt text](https://ada-strapi-production.s3.sa-east-1.amazonaws.com/Thumb_Metatag_1c7d5326d2.jpg)
 
 # CineManager: Catálogo de Filmes 🎬
 
