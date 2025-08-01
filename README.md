@@ -6,11 +6,11 @@ Este é o repositório do projeto **CineManager**, desenvolvido como parte do de
 
 ## 📝 Descrição do Projeto
 
-text
+Desenvolvido como parte do desafio de projeto do Mercado Livre. O objetivo é criar um sistema de catálogo de filmes, similar ao IMDb, aplicando os principais conceitos de Programação Orientada a Objetos (POO).
 
 ## ✨ Funcionalidades
 
-text
+O projeto é uma aplicação de console que permite aos usuários gerenciar um catálogo de filmes. É possível cadastrar novos filmes com seus respectivos atributos (título, data de lançamento, orçamento, descrição), bem como cadastrar os diretores e atores que participaram dessas produções. O sistema também permite a associação entre filmes, atores e diretores, e oferece uma funcionalidade de busca para encontrar filmes pelo nome.
 
 ## 🏛️ O Pilar da Programação Orientada a Objetos
 
@@ -53,8 +53,8 @@ Abaixo está o diagrama de classes que representa a arquitetura do sistema:
 
 Este projeto foi desenvolvido com a colaboração dos seguintes integrantes:
 
-  - [Nome do Integrante 1](https://www.google.com/search?q=https://github.com/usuario1)
-  - [Nome do Integrante 2](https://www.google.com/search?q=https://github.com/usuario2)
-  - [Nome do Integrante 3](https://www.google.com/search?q=https://github.com/usuario3)
-  - [Nome do Integrante 4](https://www.google.com/search?q=https://github.com/usuario4)
+  - [Lucas Alves](https://www.google.com/search?q=https://github.com/usuario2)
+  - [Elaine Fabiola Soares](https://github.com/elainefabiola)
+  - [Pedro Athayde](https://github.com/PedroLVA)
+
 
