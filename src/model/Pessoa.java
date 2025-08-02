@@ -7,12 +7,15 @@ package model;
  */
 public abstract class Pessoa {
 
-    private Long id;
+    private static long proximoId = 1; // Variável estática para gerar IDs sequenciais
+
+    private final long id;
     private String nome;
     private Integer idade;
     private String nacionalidade;
 
     public Pessoa(String nome) {
+        this.id = proximoId++;
         this.nome = nome;
     }
 
