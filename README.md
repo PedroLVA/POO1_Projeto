@@ -1,8 +1,8 @@
 ![Alt text](https://ada-strapi-production.s3.sa-east-1.amazonaws.com/Thumb_Metatag_1c7d5326d2.jpg)
 
-# CineManager: Catálogo de Filmes 🎬
+# Catálogo de Filmes 🎬
 
-Este é o repositório do projeto **CineManager**, desenvolvido como parte do desafio de projeto do Mercado Livre. O objetivo é criar um sistema de catálogo de filmes, similar ao IMDb, aplicando os principais conceitos de Programação Orientada a Objetos (POO).
+Desenvolvido como parte do desafio de projeto do Mercado Livre. O objetivo é criar um sistema de catálogo de filmes, similar ao IMDb, aplicando os principais conceitos de Programação Orientada a Objetos (POO).
 
 ## 📝 Descrição do Projeto
 
@@ -56,5 +56,6 @@ Este projeto foi desenvolvido com a colaboração dos seguintes integrantes:
   - [Lucas Alves](https://www.google.com/search?q=https://github.com/usuario2)
   - [Elaine Fabiola Soares](https://github.com/elainefabiola)
   - [Pedro Athayde](https://github.com/PedroLVA)
+
 
 
