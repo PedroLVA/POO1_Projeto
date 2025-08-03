@@ -26,17 +26,17 @@ public class CatalogoController {
         this.diretorService = new DiretorService();
     }
 
-    public ResultadoOperacao cadastrarFilme(Filme filme) {
+    public ResultadoOperacao<Filme> cadastrarFilme(Filme filme) {
         // TODO: Implementar a lógica
         return null;
     }
     
-    public ResultadoOperacao cadastrarAtor(Ator ator) {
+    public ResultadoOperacao<Ator> cadastrarAtor(Ator ator) {
         // TODO: Implementar a lógica
         return null;
     }
     
-    public ResultadoOperacao cadastrarDiretor(Diretor diretor) {
+    public ResultadoOperacao<Diretor> cadastrarDiretor(Diretor diretor) {
         // TODO: Implementar a lógica
         return null;
     }
@@ -56,22 +56,22 @@ public class CatalogoController {
         return null;
     }
     
-    public ResultadoOperacao editarFilme(Filme filme) {
+    public ResultadoOperacao<Filme> editarFilme(Filme filme) {
         // TODO: Implementar a lógica
         return null;
     }
     
-    public ResultadoOperacao removerFilme(Long id) {
+    public ResultadoOperacao<Void> removerFilme(Long id) {
         // TODO: Implementar a lógica
         return null;
     }
     
-    public ResultadoOperacao associarAtorFilme(Long filmeId, Long atorId) {
+    public ResultadoOperacao<Void> associarAtorFilme(Long filmeId, Long atorId) {
         // TODO: Implementar a lógica
         return null;
     }
     
-    public ResultadoOperacao associarDiretorFilme(Long filmeId, Long diretorId) {
+    public ResultadoOperacao<Void> associarDiretorFilme(Long filmeId, Long diretorId) {
         // TODO: Implementar a lógica
         return null;
     }
