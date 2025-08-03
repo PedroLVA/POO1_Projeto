@@ -39,4 +39,12 @@ public class Ator extends Pessoa {
         // TODO: Implementar a lógica para exibir informações do model.Ator
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "Ator{" +
+                "id=" + getId() +
+                ", nome='" + getNome() + '\'' +
+                '}';
+    }
 }
