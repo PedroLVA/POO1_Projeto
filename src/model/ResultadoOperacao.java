@@ -1,109 +1,95 @@
 package model;
 
 /**
- * Objeto de Valor para padronizar o retorno das operações,
- * informando o sucesso, uma mensagem e dados opcionais.
+ * Classe simples para armazenar o resultado de uma operação.
  * 
- * @param <T> Tipo dos dados que podem ser retornados
+ * Esta classe é usada para informar se uma operação foi bem-sucedida ou não,
+ * junto com uma mensagem explicativa e dados opcionais.
+ * 
+ * Exemplo de uso:
+ * - Quando cadastramos um filme: sucesso = true, mensagem = "Filme cadastrado com sucesso"
+ * - Quando há erro: sucesso = false, mensagem = "Erro: filme não encontrado"
  */
-public class ResultadoOperacao<T> {
+public class ResultadoOperacao {
 
-    private final boolean sucesso;
-    private final String mensagem;
-    private final T dados;
+    // Atributos da classe
+    private boolean sucesso;        // true = operação deu certo, false = deu erro
+    private String mensagem;        // texto explicando o que aconteceu
+    private Object dados;           // informações adicionais (pode ser qualquer coisa)
 
-    /**
-     * Construtor principal com validações.
-     * 
-     * @param sucesso Indica se a operação foi bem-sucedida
-     * @param mensagem Mensagem descritiva do resultado
-     * @param dados Dados opcionais relacionados à operação
-     * @throws IllegalArgumentException se a mensagem for nula
-     */
-    public ResultadoOperacao(boolean sucesso, String mensagem, T dados) {
-        if (mensagem == null) {
-            throw new IllegalArgumentException("Mensagem não pode ser nula");
-        }
+    public ResultadoOperacao(boolean sucesso, String mensagem) {
         this.sucesso = sucesso;
         this.mensagem = mensagem;
-        this.dados = dados;
+        this.dados = null;  // inicialmente não há dados
     }
 
     /**
-     * Construtor para operações sem dados de retorno.
-     * 
-     * @param sucesso Indica se a operação foi bem-sucedida
-     * @param mensagem Mensagem descritiva do resultado
-     * @throws IllegalArgumentException se a mensagem for nula
+     * Método para criar um resultado de SUCESSO
      */
-    public ResultadoOperacao(boolean sucesso, String mensagem) {
-        this(sucesso, mensagem, null);
+    public static ResultadoOperacao criarSucesso(String mensagem) {
+        return new ResultadoOperacao(true, mensagem);
     }
     
-    /**
-     * Cria um resultado de sucesso sem dados.
-     * 
-     * @param mensagem Mensagem de sucesso
-     * @return ResultadoOperacao indicando sucesso
-     */
-    public static <T> ResultadoOperacao<T> criarSucesso(String mensagem) {
-        return new ResultadoOperacao<>(true, mensagem, null);
-    }
-    
-    /**
-     * Cria um resultado de sucesso com dados.
-     * 
-     * @param mensagem Mensagem de sucesso
-     * @param dados Dados a serem retornados
-     * @return ResultadoOperacao indicando sucesso com dados
-     */
-    public static <T> ResultadoOperacao<T> criarSucesso(String mensagem, T dados) {
-        return new ResultadoOperacao<>(true, mensagem, dados);
-    }
-    
-    /**
-     * Cria um resultado de erro.
-     * 
-     * @param mensagem Mensagem de erro
-     * @return ResultadoOperacao indicando erro
-     */
-    public static <T> ResultadoOperacao<T> criarErro(String mensagem) {
-        return new ResultadoOperacao<>(false, mensagem, null);
+    public static ResultadoOperacao criarErro(String mensagem) {
+        return new ResultadoOperacao(false, mensagem);
     }
 
+    // ===== MÉTODOS GETTERS =====
+    
     /**
-     * Verifica se a operação foi bem-sucedida.
-     * 
-     * @return true se a operação foi bem-sucedida, false caso contrário
+     * Verifica se a operação foi bem-sucedida
      */
     public boolean isSucesso() { 
         return sucesso; 
     }
     
     /**
-     * Obtém a mensagem do resultado.
-     * 
-     * @return Mensagem descritiva do resultado
+     * Obtém a mensagem do resultado
      */
     public String getMensagem() { 
         return mensagem; 
     }
     
     /**
-     * Obtém os dados do resultado.
-     * 
-     * @return Dados relacionados à operação, ou null se não houver dados
+     * Obtém os dados adicionais (se houver)
      */
-    public T getDados() { 
+    public Object getDados() { 
         return dados; 
     }
     
+    // ===== MÉTODOS SETTERS =====
+    
     /**
-     * Verifica se há dados no resultado.
-     * 
-     * @return true se há dados, false caso contrário
+     * Define dados adicionais para o resultado
+     */
+    public void setDados(Object dados) { 
+        this.dados = dados; 
+    }
+    
+    /**
+     * Verifica se há dados no resultado
      */
     public boolean temDados() {
         return dados != null;
+    }
+    
+    /**
+     * Método para mostrar o resultado de forma legível
+     */
+    @Override
+    public String toString() {
+        String resultado = "Resultado: ";
+        if (sucesso) {
+            resultado += "SUCESSO";
+        } else {
+            resultado += "ERRO";
+        }
+        resultado += " - " + mensagem;
+        
+        if (temDados()) {
+            resultado += " (com dados)";
+        }
+        
+        return resultado;
     }
 }
