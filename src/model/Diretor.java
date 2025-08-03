@@ -40,7 +40,7 @@ public class Diretor extends Pessoa {
     @Override
     public boolean validarDados() {
         // TODO: Implementar a lógica de validação específica para model.Diretor
-        return false;
+        return true;
     }
 
     @Override
