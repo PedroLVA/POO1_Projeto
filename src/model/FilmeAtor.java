@@ -1,56 +1,47 @@
 package model;
 
 /**
- * Classe associativa que representa o relacionamento N:N (Muitos-para-Muitos)
- * entre model.Filme e model.Ator. Ela armazena os IDs de ambos e também atributos
+ * Classe FilmeAtor - Representa a associação entre um filme e um ator
+ * 
+ * Esta é uma classe associativa que representa o relacionamento N:N (Muitos-para-Muitos)
+ * entre Filme e Ator. Ela armazena os IDs de ambos e também atributos
  * específicos dessa relação, como o nome do personagem interpretado.
+ * 
+ * Exemplo prático:
+ * - Leonardo DiCaprio interpretou Jack Dawson no filme Titanic
+ * - Esta classe guarda: filmeId (Titanic), atorId (Leonardo), personagem (Jack Dawson)
+ * 
+ * Relacionamento N:N:
+ * - Um filme pode ter vários atores
+ * - Um ator pode participar de vários filmes
+ * - Esta classe conecta os dois
  */
 public class FilmeAtor {
 
-    private Long filmeId;
-    private Long atorId;
-    private String personagem;
+    // ===== ATRIBUTOS =====
+    // Estas são as informações da associação filme-ator
+    
+    private int filmeId;        // ID do filme
+    private int atorId;         // ID do ator
+    private String personagem;  // Nome do personagem que o ator interpretou
 
-    /**
-     * Construtor para criar a associação entre um filme e um ator.
-     * @param filmeId O ID do filme.
-     * @param atorId O ID do ator.
-     */
     public FilmeAtor(Long filmeId, Long atorId) {
         this.filmeId = filmeId;
         this.atorId = atorId;
     }
 
-    // --- Getters e Setters ---
-
-    /**
-     * Retorna o ID do filme associado.
-     * @return O ID do filme.
-     */
-    public Long getFilmeId() {
+    // ===== MÉTODOS CONCRETOS (GETTERS E SETTERS) =====
+    public int getFilmeId() {
         return filmeId;
     }
-
-    /**
-     * Retorna o ID do ator associado.
-     * @return O ID do ator.
-     */
     public Long getAtorId() {
         return atorId;
     }
 
-    /**
-     * Retorna o nome do personagem que o ator interpretou no filme.
-     * @return O nome do personagem.
-     */
     public String getPersonagem() {
         return personagem;
     }
 
-    /**
-     * Define o nome do personagem que o ator interpretou no filme.
-     * @param personagem O nome do personagem.
-     */
     public void setPersonagem(String personagem) {
         this.personagem = personagem;
     }
