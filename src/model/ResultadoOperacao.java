@@ -13,7 +13,7 @@ package model;
 public class ResultadoOperacao {
 
     // Atributos da classe
-    private boolean sucesso;        // true = operação deu certo, false = deu erro
+    private boolean sucesso;        
     private String mensagem;        // texto explicando o que aconteceu
     private Object dados;           // informações adicionais (pode ser qualquer coisa)
 
