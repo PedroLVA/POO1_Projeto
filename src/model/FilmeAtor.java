@@ -19,8 +19,6 @@ package model;
 public class FilmeAtor {
 
     // ===== ATRIBUTOS =====
-    // Estas são as informações da associação filme-ator
-    
     private int filmeId;        // ID do filme
     private int atorId;         // ID do ator
     private String personagem;  // Nome do personagem que o ator interpretou
