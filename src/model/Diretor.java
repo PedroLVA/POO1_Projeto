@@ -20,11 +20,11 @@ public class Diretor extends Pessoa {
 
     // ===== ATRIBUTOS ESPECÍFICOS DO DIRETOR =====
     private String estilo; // Estilo de direção (ex: ação, drama, comédia)
-    private List<Filme> filmesDigiridos; // Lista de filmes que o diretor dirigiu
+    private List<Filme> filmesDirigidos; // Lista de filmes que o diretor dirigiu
 
     public Diretor(String nome) {
         super(nome);  // Chama o construtor da classe pai (Pessoa)
-        this.filmesDigiridos = new ArrayList<>();  // Inicializa a lista vazia
+        this.filmesDirigidos = new ArrayList<>();  // Inicializa a lista vazia
     }
 
     public String getEstilo() {
@@ -35,7 +35,7 @@ public class Diretor extends Pessoa {
         this.estilo = estilo;
     }
 
-    public List<Filme> getFilmesDigiridos() {
+    public List<Filme> getFilmesDirigidos() {
         // TODO: Implementar a lógica
         return null;
     }
