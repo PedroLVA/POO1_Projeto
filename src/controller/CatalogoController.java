@@ -33,13 +33,6 @@ public class CatalogoController {
     private final DiretorService diretorService; // Para trabalhar com diretores
 
     // ===== CONSTRUTOR =====
-    /**
-     * Construtor - prepara o controller para funcionar
-     * 
-     * Quando criamos um CatalogoController, ele automaticamente
-     * cria as "ferramentas" (services) que vai precisar.
-     * É como montar uma caixa de ferramentas antes de começar a trabalhar!
-     */
     public CatalogoController() {
         // Criamos as ferramentas que vamos usar
         this.filmeService = new FilmeService();
@@ -51,16 +44,6 @@ public class CatalogoController {
 
     // ===== MÉTODOS PARA FILMES =====
 
-    /**
-     * Cadastra um novo filme no sistema
-     * 
-     * Exemplo de uso:
-     * Filme titanic = new Filme("Titanic", "1997");
-     * ResultadoOperacao resultado = controller.cadastrarFilme(titanic);
-     * 
-     * @param filme o filme que queremos cadastrar
-     * @return resultado da operação (sucesso ou erro)
-     */
     public ResultadoOperacao cadastrarFilme(Filme filme) {
         // PASSO 1: Verificar se o filme não é nulo
         if (filme == null) {
@@ -80,15 +63,6 @@ public class CatalogoController {
         }
     }
     
-    /**
-     * Busca filmes pelo nome (pode encontrar vários)
-     * 
-     * Exemplo de uso:
-     * List<Filme> filmes = controller.pesquisarFilmePorNome("Titanic");
-     * 
-     * @param nome nome do filme que queremos encontrar
-     * @return lista de filmes encontrados
-     */
     public List<Filme> pesquisarFilmePorNome(String nome) {
         // PASSO 1: Verificar se o nome não é nulo ou vazio
         if (nome == null || nome.trim().isEmpty()) {
@@ -109,14 +83,6 @@ public class CatalogoController {
         return filmesEncontrados;
     }
     
-    /**
-     * Lista todos os filmes cadastrados
-     * 
-     * Exemplo de uso:
-     * List<Filme> todosOsFilmes = controller.listarFilmes();
-     * 
-     * @return lista com todos os filmes
-     */
     public List<Filme> listarFilmes() {
         // PASSO 1: Pedir para filmeService listar todos os filmes
         List<Filme> todosOsFilmes = filmeService.listarTodos();
@@ -132,15 +98,6 @@ public class CatalogoController {
         return todosOsFilmes;
     }
     
-    /**
-     * Mostra os detalhes de um filme específico
-     * 
-     * Exemplo de uso:
-     * Filme filme = controller.visualizarDetalhesFilme(1L);
-     * 
-     * @param id número de identificação do filme
-     * @return o filme encontrado ou null se não encontrar
-     */
     public Filme visualizarDetalhesFilme(Long id) {
         // PASSO 1: Verificar se o ID não é nulo
         if (id == null) {
@@ -162,16 +119,6 @@ public class CatalogoController {
         return filmeEncontrado;
     }
     
-    /**
-     * Edita as informações de um filme existente
-     * 
-     * Exemplo de uso:
-     * filme.setTitulo("Novo Título");
-     * ResultadoOperacao resultado = controller.editarFilme(filme);
-     * 
-     * @param filme filme com as informações atualizadas
-     * @return resultado da operação
-     */
     public ResultadoOperacao editarFilme(Filme filme) {
         // PASSO 1: Verificar se o filme não é nulo
         if (filme == null) {
@@ -189,15 +136,6 @@ public class CatalogoController {
         }
     }
     
-    /**
-     * Remove um filme do sistema
-     * 
-     * Exemplo de uso:
-     * ResultadoOperacao resultado = controller.removerFilme(1L);
-     * 
-     * @param id número de identificação do filme a ser removido
-     * @return resultado da operação
-     */
     public ResultadoOperacao removerFilme(Long id) {
         // PASSO 1: Verificar se o ID não é nulo
         if (id == null) {
@@ -215,18 +153,6 @@ public class CatalogoController {
         }
     }
 
-    // ===== MÉTODOS PARA ATORES =====
-    
-    /**
-     * Cadastra um novo ator no sistema
-     * 
-     * Exemplo de uso:
-     * Ator leonardo = new Ator("Leonardo DiCaprio", "1974-11-11");
-     * ResultadoOperacao resultado = controller.cadastrarAtor(leonardo);
-     * 
-     * @param ator o ator que queremos cadastrar
-     * @return resultado da operação
-     */
     public ResultadoOperacao cadastrarAtor(Ator ator) {
         // PASSO 1: Verificar se o ator não é nulo
         if (ator == null) {
@@ -246,18 +172,6 @@ public class CatalogoController {
         }
     }
 
-    // ===== MÉTODOS PARA DIRETORES =====
-    
-    /**
-     * Cadastra um novo diretor no sistema
-     * 
-     * Exemplo de uso:
-     * Diretor cameron = new Diretor("James Cameron", "1954-08-16");
-     * ResultadoOperacao resultado = controller.cadastrarDiretor(cameron);
-     * 
-     * @param diretor o diretor que queremos cadastrar
-     * @return resultado da operação
-     */
     public ResultadoOperacao cadastrarDiretor(Diretor diretor) {
         // PASSO 1: Verificar se o diretor não é nulo
         if (diretor == null) {
@@ -277,18 +191,6 @@ public class CatalogoController {
         }
     }
 
-    // ===== MÉTODOS PARA ASSOCIAÇÕES =====
-    
-    /**
-     * Associa um ator a um filme (diz que o ator participou do filme)
-     * 
-     * Exemplo de uso:
-     * ResultadoOperacao resultado = controller.associarAtorFilme(1L, 1L);
-     * 
-     * @param filmeId número de identificação do filme
-     * @param atorId número de identificação do ator
-     * @return resultado da operação
-     */
     public ResultadoOperacao associarAtorFilme(Long filmeId, Long atorId) {
         // PASSO 1: Verificar se os IDs não são nulos
         if (filmeId == null || atorId == null) {
@@ -317,16 +219,6 @@ public class CatalogoController {
         }
     }
     
-    /**
-     * Associa um diretor a um filme (diz que o diretor dirigiu o filme)
-     * 
-     * Exemplo de uso:
-     * ResultadoOperacao resultado = controller.associarDiretorFilme(1L, 1L);
-     * 
-     * @param filmeId número de identificação do filme
-     * @param diretorId número de identificação do diretor
-     * @return resultado da operação
-     */
     public ResultadoOperacao associarDiretorFilme(Long filmeId, Long diretorId) {
         // PASSO 1: Verificar se os IDs não são nulos
         if (filmeId == null || diretorId == null) {
