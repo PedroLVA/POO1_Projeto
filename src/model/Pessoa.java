@@ -21,9 +21,9 @@ public abstract class Pessoa {
     // ===== ATRIBUTOS =====
     // Estas são as informações que todas as pessoas têm
     
-    private static long proximoId = 1; // Gera números únicos automaticamente (1, 2, 3...)
+    private static int proximoId = 1; // Gera números únicos automaticamente (1, 2, 3...)
     
-    private final long id;              // Número único de identificação
+    private final int id;              // Número único de identificação
     private String nome;                // Nome da pessoa
     private Integer idade;              // Idade da pessoa
     private String nacionalidade;       // País de origem
