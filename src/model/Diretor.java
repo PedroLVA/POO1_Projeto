@@ -4,16 +4,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Representa um model.Diretor, especialização de model.Pessoa.
+ * Classe Diretor - Representa um diretor no sistema
+ * 
+ * Esta classe herda da classe Pessoa, o que significa que:
+ * - Diretor tem tudo que Pessoa tem (nome, idade, nacionalidade, id)
+ * - Diretor pode ter coisas específicas de diretor (estilo, filmes dirigidos)
+ * - Diretor DEVE implementar os métodos abstratos da classe Pessoa
+ * 
+ * Exemplo prático:
+ * - James Cameron é um diretor
+ * - Ele tem nome, idade, nacionalidade (herdados de Pessoa)
+ * - Ele tem um estilo de direção e uma lista de filmes que dirigiu (específico de Diretor)
  */
 public class Diretor extends Pessoa {
 
-    private String estilo;
-    private List<Filme> filmesDigiridos;
+    // ===== ATRIBUTOS ESPECÍFICOS DO DIRETOR =====
+    private String estilo; // Estilo de direção (ex: ação, drama, comédia)
+    private List<Filme> filmesDirigidos; // Lista de filmes que o diretor dirigiu
 
     public Diretor(String nome) {
-        super(nome);
-        this.filmesDigiridos = new ArrayList<>();
+        super(nome);  // Chama o construtor da classe pai (Pessoa)
+        this.filmesDirigidos = new ArrayList<>();  // Inicializa a lista vazia
     }
 
     public String getEstilo() {
@@ -24,7 +35,7 @@ public class Diretor extends Pessoa {
         this.estilo = estilo;
     }
 
-    public List<Filme> getFilmesDigiridos() {
+    public List<Filme> getFilmesDirigidos() {
         // TODO: Implementar a lógica
         return null;
     }
