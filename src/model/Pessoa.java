@@ -38,8 +38,13 @@ public abstract class Pessoa {
      * @param nome o nome da pessoa
      */
     public Pessoa(String nome) {
+        // VALIDAÇÃO: Verificar se o nome não é null ou vazio
+        if (nome == null || nome.trim().isEmpty()) {
+            throw new IllegalArgumentException("❌ Erro: Nome da pessoa não pode ser null ou vazio!");
+        }
+        
         this.id = proximoId++;  // Pega o próximo número disponível
-        this.nome = nome;       // Define o nome
+        this.nome = nome.trim(); // Remove espaços em branco e define o nome
     }
 
     // ===== MÉTODOS ABSTRATOS =====
@@ -50,26 +55,32 @@ public abstract class Pessoa {
     public abstract String exibirInformacoes();
 
     // ===== MÉTODOS CONCRETOS (GETTERS E SETTERS) =====
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
     public String getNome() {
         return nome;
     }
     public void setNome(String nome) {
-        this.nome = nome;
+        if (nome == null || nome.trim().isEmpty()) {
+            throw new IllegalArgumentException("❌ Erro: Nome da pessoa não pode ser null ou vazio!");
+        }
+        this.nome = nome.trim();
     }
     public Integer getIdade() {
         return idade;
     }
     public void setIdade(Integer idade) {
+        if (idade != null && idade < 0) {
+            throw new IllegalArgumentException("❌ Erro: Idade não pode ser negativa!");
+        }
         this.idade = idade;
     }
     public String getNacionalidade() {
         return nacionalidade;
     }
     public void setNacionalidade(String nacionalidade) {
-        this.nacionalidade = nacionalidade;
+        this.nacionalidade = nacionalidade != null ? nacionalidade.trim() : null;
     }
 
     // ===== MÉTODOS ESPECIAIS =====
