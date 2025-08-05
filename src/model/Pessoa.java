@@ -34,13 +34,11 @@ public abstract class Pessoa {
      * 
      * Quando criamos uma pessoa (ator ou diretor), ela automaticamente
      * recebe um número único de identificação.
-     * 
-     * @param nome o nome da pessoa
      */
     public Pessoa(String nome) {
         // VALIDAÇÃO: Verificar se o nome não é null ou vazio
         if (nome == null || nome.trim().isEmpty()) {
-            throw new IllegalArgumentException("❌ Erro: Nome da pessoa não pode ser null ou vazio!");
+            throw new IllegalArgumentException("Erro: Nome da pessoa não pode ser null ou vazio!");
         }
         
         this.id = proximoId++;  // Pega o próximo número disponível
@@ -51,7 +49,6 @@ public abstract class Pessoa {
     // Estes métodos NÃO têm implementação aqui.
     // As classes filhas (Ator e Diretor) SÃO OBRIGADAS a implementá-los.
     public abstract boolean validarDados();
-
     public abstract String exibirInformacoes();
 
     // ===== MÉTODOS CONCRETOS (GETTERS E SETTERS) =====
@@ -63,7 +60,7 @@ public abstract class Pessoa {
     }
     public void setNome(String nome) {
         if (nome == null || nome.trim().isEmpty()) {
-            throw new IllegalArgumentException("❌ Erro: Nome da pessoa não pode ser null ou vazio!");
+            throw new IllegalArgumentException("Erro: Nome da pessoa não pode ser null ou vazio!");
         }
         this.nome = nome.trim();
     }
@@ -72,7 +69,7 @@ public abstract class Pessoa {
     }
     public void setIdade(Integer idade) {
         if (idade != null && idade < 0) {
-            throw new IllegalArgumentException("❌ Erro: Idade não pode ser negativa!");
+            throw new IllegalArgumentException("Erro: Idade não pode ser negativa!");
         }
         this.idade = idade;
     }
@@ -82,17 +79,7 @@ public abstract class Pessoa {
     public void setNacionalidade(String nacionalidade) {
         this.nacionalidade = nacionalidade != null ? nacionalidade.trim() : null;
     }
-
     // ===== MÉTODOS ESPECIAIS =====
-    
-    /**
-     * Converte a pessoa para texto (usado quando imprimimos no console)
-     * 
-     * Quando fazemos System.out.println(pessoa), este método é chamado
-     * automaticamente para mostrar o nome da pessoa.
-     * 
-     * @return o nome da pessoa
-     */
     @Override
     public String toString() {
         return nome;
