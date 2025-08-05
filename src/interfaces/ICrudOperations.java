@@ -14,42 +14,9 @@ import java.util.List;
  */
 public interface ICrudOperations<T> {
 
-    /**
-     * Cadastra um novo objeto no sistema
-     * 
-     * @param entidade o objeto que queremos cadastrar (filme, ator, diretor, etc.)
-     * @return true se cadastrou com sucesso, false se deu erro
-     */
     boolean cadastrar(T entidade);
-    
-    /**
-     * Busca um objeto pelo seu número de identificação (ID)
-     * 
-     * @param id o número que identifica o objeto
-     * @return o objeto encontrado, ou null se não encontrar
-     */
-    T buscarPorId(Long id);
-    
-    /**
-     * Lista todos os objetos cadastrados
-     * 
-     * @return uma lista com todos os objetos
-     */
+    T buscarPorId(int id);
     List<T> listarTodos();
-    
-    /**
-     * Atualiza as informações de um objeto existente
-     * 
-     * @param entidade o objeto com as informações atualizadas
-     * @return true se atualizou com sucesso, false se deu erro
-     */
     boolean atualizar(T entidade);
-    
-    /**
-     * Remove um objeto do sistema
-     * 
-     * @param id o número que identifica o objeto a ser removido
-     * @return true se removeu com sucesso, false se deu erro
-     */
-    boolean remover(Long id);
+    boolean remover(int id);
 }
