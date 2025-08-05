@@ -25,7 +25,7 @@ public class FilmeAtor {
     private int atorId;         // ID do ator
     private String personagem;  // Nome do personagem que o ator interpretou
 
-    public FilmeAtor(Long filmeId, Long atorId) {
+    public FilmeAtor(int filmeId, int atorId) {
         this.filmeId = filmeId;
         this.atorId = atorId;
     }
@@ -34,7 +34,7 @@ public class FilmeAtor {
     public int getFilmeId() {
         return filmeId;
     }
-    public Long getAtorId() {
+    public int getAtorId() {
         return atorId;
     }
 
