@@ -7,10 +7,10 @@ import java.util.List;
 
 /**
  * Classe Filme - Representa um filme no sistema
- * 
+ *
  * Esta é a classe principal do sistema, que representa um filme
  * com todas as suas informações básicas e relacionamentos.
- * 
+ *
  * Exemplo prático:
  * - Titanic é um filme
  * - Tem nome, data de lançamento, orçamento, descrição
@@ -19,94 +19,105 @@ import java.util.List;
  */
 public class Filme {
 
-    // ===== ATRIBUTOS =====
-    // Estas são as informações básicas do filme
-    
-    private int id;                    // Número único de identificação do filme
-    private String nome;               // Nome/título do filme
-    private LocalDate dataLancamento;  // Data quando o filme foi lançado
-    private BigDecimal orcamento;      // Quanto custou para fazer o filme
-    private String descricao;          // Sinopse/descrição do filme
-    private Diretor diretor;           // Quem dirigiu o filme
-    private List<Ator> atores;         // Lista de atores que participaram
+    private int id;
+    private String nome;
+    private LocalDate dataLancamento;
+    private BigDecimal orcamento;
+    private String descricao;
+    private Diretor diretor;
+    private List<Ator> atores;
 
     public Filme(String nome, LocalDate dataLancamento) {
         this.nome = nome;
         this.dataLancamento = dataLancamento;
-        this.atores = new ArrayList<>();  // Inicializa a lista vazia de atores
+        this.atores = new ArrayList<>();
     }
 
     public void adicionarAtor(Ator ator) {
-        // TODO: Implementar a lógica
+        if (ator != null && !this.atores.contains(ator)) {
+            this.atores.add(ator);
+            ator.adicionarFilme(this); // Mantém a consistência bidirecional
+        }
     }
 
     public void removerAtor(Ator ator) {
-        // TODO: Implementar a lógica
+        if (ator != null && this.atores.contains(ator)) {
+            this.atores.remove(ator);
+            ator.removerFilme(this); // Mantém a consistência bidirecional
+        }
     }
 
     public boolean validarCamposObrigatorios() {
-        // TODO: Implementar a lógica
-        return false;
+        boolean nomeValido = this.nome != null && !this.nome.trim().isEmpty();
+        boolean dataValida = this.dataLancamento != null;
+        return nomeValido && dataValida;
     }
 
     // ===== MÉTODOS CONCRETOS (GETTERS E SETTERS) =====
 
-    public int getId() { 
-        return id; 
+    public int getId() {
+        return id;
     }
 
-    public void setId(int id) { 
-        this.id = id; 
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getNome() { 
-        return nome; 
+    public String getNome() {
+        return nome;
     }
 
-    public void setNome(String nome) { 
-        this.nome = nome; 
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public LocalDate getDataLancamento() { 
-        return dataLancamento; 
+    public LocalDate getDataLancamento() {
+        return dataLancamento;
     }
 
-    public void setDataLancamento(LocalDate dataLancamento) { 
-        this.dataLancamento = dataLancamento; 
+    public void setDataLancamento(LocalDate dataLancamento) {
+        this.dataLancamento = dataLancamento;
     }
 
-    public BigDecimal getOrcamento() { 
-        return orcamento; 
+    public BigDecimal getOrcamento() {
+        return orcamento;
     }
 
-    public void setOrcamento(BigDecimal orcamento) { 
-        this.orcamento = orcamento; 
+    public void setOrcamento(BigDecimal orcamento) {
+        this.orcamento = orcamento;
     }
 
-    public String getDescricao() { 
-        return descricao; 
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDescricao(String descricao) { 
-        this.descricao = descricao; 
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public Diretor getDiretor() { 
-        return diretor; 
+    public Diretor getDiretor() {
+        return diretor;
     }
 
-    public void setDiretor(Diretor diretor) { 
-        this.diretor = diretor; 
+    public void setDiretor(Diretor diretor) {
+        this.diretor = diretor;
     }
 
-
-    public List<Ator> getAtores() { 
-        return atores; 
+    public List<Ator> getAtores() {
+        return atores;
     }
-
 
     @Override
     public String toString() {
+        // Retornar o nome do filme é uma boa representação em texto.
+        // A classe Ator usa o método getTitulo(), então vamos renomear getNome() para getTitulo()
+        // ou criar um método getTitulo() que chama getNome(). Para manter a consistência, vamos
+        // simplesmente usar getNome() como está. O código na classe Ator precisaria chamar getNome().
         return nome;
+    }
+
+    // Para consistência com o código em Ator.exibirInformacoes(), que chama getTitulo()
+    public String getTitulo() {
+        return this.nome;
     }
 }

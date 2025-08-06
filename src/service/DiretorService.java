@@ -50,12 +50,9 @@ public class DiretorService implements ICrudOperations<Diretor> {
      * @return O objeto model.Diretor encontrado, ou null se não existir.
      */
     @Override
-    public Diretor buscarPorId(Long id) {
-        if (id == null) {
-            return null;
-        }
+    public Diretor buscarPorId(int id) {
         return diretores.stream()
-                .filter(d -> id.equals(d.getId()))
+                .filter(d -> id == d.getId())
                 .findFirst()
                 .orElse(null);
     }
@@ -91,12 +88,14 @@ public class DiretorService implements ICrudOperations<Diretor> {
      */
     @Override
     public boolean atualizar(Diretor diretor) {
-        if (diretor == null || diretor.getId() == null) {
+        // Assuming getId() on the Diretor object returns a primitive int as well.
+        if (diretor == null) {
             return false;
         }
 
         for (int i = 0; i < diretores.size(); i++) {
-            if (diretores.get(i).getId().equals(diretor.getId())) {
+            // Use the '==' operator for primitive type comparison.
+            if (diretores.get(i).getId() == diretor.getId()) {
                 diretores.set(i, diretor);
                 return true;
             }
@@ -110,11 +109,10 @@ public class DiretorService implements ICrudOperations<Diretor> {
      * @return true se a remoção foi bem-sucedida, false caso contrário.
      */
     @Override
-    public boolean remover(Long id) {
-        if (id == null) {
-            return false;
-        }
-        return diretores.removeIf(d -> id.equals(d.getId()));
+    public boolean remover(int id) {
+        // No null check is needed for a primitive int.
+        // Use the '==' operator for primitive type comparison.
+        return diretores.removeIf(d -> id == d.getId());
     }
 
 

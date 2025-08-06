@@ -206,7 +206,7 @@ public class CatalogoController {
         }
         
         // Fazer a associação
-        boolean associou = filmeService.associarAtor(filmeId, atorId);
+        boolean associou = filmeService.associarAtor(filme, ator);
         
         if (associou) {
             return ResultadoOperacao.criarSucesso("Ator associado ao filme!");
@@ -235,7 +235,7 @@ public class CatalogoController {
         }
         
         // Fazer a associação
-        boolean associou = filmeService.associarDiretor(filmeId, diretorId);
+        boolean associou = filmeService.associarDiretor(filme, diretor);
         
         if (associou) {
             return ResultadoOperacao.criarSucesso("Diretor associado ao filme!");
