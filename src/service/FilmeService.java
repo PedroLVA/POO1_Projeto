@@ -33,12 +33,10 @@ public class FilmeService implements ICrudOperations<Filme> {
     }
 
     @Override
-    public Filme buscarPorId(Long id) {
-        if (id == null) {
-            return null;
-        }
+    public Filme buscarPorId(int id) {
+
         return this.filmes.stream()
-                .filter(filme -> Objects.equals(filme.getId(), id.intValue()))
+                .filter(filme -> filme.getId() == id)
                 .findFirst()
                 .orElse(null);
     }
@@ -86,7 +84,7 @@ public class FilmeService implements ICrudOperations<Filme> {
             return false;
         }
 
-        Filme filmeExistente = buscarPorId((long) filmeAtualizado.getId());
+        Filme filmeExistente = buscarPorId((int) filmeAtualizado.getId());
         if (filmeExistente == null) {
             return false;
         }
@@ -97,15 +95,11 @@ public class FilmeService implements ICrudOperations<Filme> {
     }
 
     @Override
-    public boolean remover(Long id) {
-        if (id == null) {
-            return false;
-        }
-        return this.filmes.removeIf(filme -> Objects.equals(filme.getId(), id.intValue()));
+    public boolean remover(int id) {
+        return this.filmes.removeIf(filme -> filme.getId() == id);
     }
 
     public boolean associarAtor(Filme filme, Ator ator) {
-        // A busca não é mais necessária! A lógica é apenas a ação de associar.
         if (filme != null && ator != null) {
             filme.adicionarAtor(ator);
             return true;

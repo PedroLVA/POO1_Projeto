@@ -45,15 +45,13 @@ public class AtorService implements ICrudOperations<Ator> {
      * @return O objeto model.Ator encontrado, ou null se não existir.
      */
     @Override
-    public Ator buscarPorId(Long id) {
-        if (id == null) {
-            return null;
-        }
+    public Ator buscarPorId(int id) {
+        // A primitive int cannot be null, so the null check is removed.
         return atores.stream()
-                .filter(ator -> id.equals(ator.getId()))
+                // Use '==' for primitive type comparison.
+                .filter(ator -> id == ator.getId())
                 .findFirst()
                 .orElseThrow(() -> new PessoaNaoEncontradaException("Ator com o ID: " + id + " não encontrado"));
-
     }
 
     /**
@@ -107,12 +105,12 @@ public class AtorService implements ICrudOperations<Ator> {
      * @param id O ID do ator a ser removido.
      * @return true se a remoção foi bem-sucedida, false caso contrário.
      */
+
     @Override
-    public boolean remover(Long id) {
-        if (id == null) {
-            return false;
-        }
-        return atores.removeIf(ator -> id.equals(ator.getId()));
+    public boolean remover(int id) {
+        // A primitive int cannot be null, so the null check is removed.
+        // Use '==' for primitive type comparison inside the lambda.
+        return atores.removeIf(ator -> id == ator.getId());
     }
 
     /**
