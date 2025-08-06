@@ -64,7 +64,7 @@ public class CatalogoController {
     public ResultadoOperacao cadastrarFilme(Filme filme) {
         // PASSO 1: Verificar se o filme não é nulo
         if (filme == null) {
-            return ResultadoOperacao.criarErro("❌ Erro: Filme não pode ser nulo!");
+            return ResultadoOperacao.criarErro("Erro: Filme não pode ser nulo!");
         }
         
         // PASSO 2: Tentar cadastrar usando filmeService
@@ -72,11 +72,11 @@ public class CatalogoController {
         
         // PASSO 3: Retornar resultado (sucesso ou erro)
         if (cadastrou) {
-            ResultadoOperacao resultado = ResultadoOperacao.criarSucesso("✅ Filme cadastrado com sucesso!");
+            ResultadoOperacao resultado = ResultadoOperacao.criarSucesso("Filme cadastrado com sucesso!");
             resultado.setDados(filme);  // guardamos o filme como dado extra
             return resultado;
         } else {
-            return ResultadoOperacao.criarErro("❌ Não foi possível cadastrar o filme");
+            return ResultadoOperacao.criarErro("Não foi possível cadastrar o filme");
         }
     }
     
@@ -144,7 +144,7 @@ public class CatalogoController {
     public Filme visualizarDetalhesFilme(Long id) {
         // PASSO 1: Verificar se o ID não é nulo
         if (id == null) {
-            System.out.println("⚠️ Aviso: ID do filme não pode ser nulo");
+            System.out.println("Aviso: ID do filme não pode ser nulo");
             return null;  // retorna null se o ID for inválido
         }
         
@@ -175,7 +175,7 @@ public class CatalogoController {
     public ResultadoOperacao editarFilme(Filme filme) {
         // PASSO 1: Verificar se o filme não é nulo
         if (filme == null) {
-            return ResultadoOperacao.criarErro("❌ Erro: Filme não pode ser nulo!");
+            return ResultadoOperacao.criarErro("Erro: Filme não pode ser nulo!");
         }
         
         // PASSO 2: Tentar atualizar usando filmeService
@@ -183,9 +183,9 @@ public class CatalogoController {
         
         // PASSO 3: Retornar resultado
         if (atualizou) {
-            return ResultadoOperacao.criarSucesso("✅ Filme atualizado com sucesso!");
+            return ResultadoOperacao.criarSucesso("Filme atualizado com sucesso!");
         } else {
-            return ResultadoOperacao.criarErro("❌ Não foi possível atualizar o filme");
+            return ResultadoOperacao.criarErro(" Não foi possível atualizar o filme");
         }
     }
     
@@ -201,7 +201,7 @@ public class CatalogoController {
     public ResultadoOperacao removerFilme(Long id) {
         // PASSO 1: Verificar se o ID não é nulo
         if (id == null) {
-            return ResultadoOperacao.criarErro("❌ Erro: ID do filme não pode ser nulo!");
+            return ResultadoOperacao.criarErro("Erro: ID do filme não pode ser nulo!");
         }
         
         // PASSO 2: Tentar remover usando filmeService
@@ -209,9 +209,9 @@ public class CatalogoController {
         
         // PASSO 3: Retornar resultado
         if (removeu) {
-            return ResultadoOperacao.criarSucesso("✅ Filme removido com sucesso!");
+            return ResultadoOperacao.criarSucesso("Filme removido com sucesso!");
         } else {
-            return ResultadoOperacao.criarErro("❌ Não foi possível remover o filme");
+            return ResultadoOperacao.criarErro("Não foi possível remover o filme");
         }
     }
 
@@ -230,7 +230,7 @@ public class CatalogoController {
     public ResultadoOperacao cadastrarAtor(Ator ator) {
         // PASSO 1: Verificar se o ator não é nulo
         if (ator == null) {
-            return ResultadoOperacao.criarErro("❌ Erro: Ator não pode ser nulo!");
+            return ResultadoOperacao.criarErro("Erro: Ator não pode ser nulo!");
         }
         
         // PASSO 2: Tentar cadastrar usando atorService
@@ -238,11 +238,11 @@ public class CatalogoController {
         
         // PASSO 3: Retornar resultado
         if (cadastrou) {
-            ResultadoOperacao resultado = ResultadoOperacao.criarSucesso("✅ Ator cadastrado com sucesso!");
+            ResultadoOperacao resultado = ResultadoOperacao.criarSucesso("Ator cadastrado com sucesso!");
             resultado.setDados(ator);  // guardamos o ator como dado extra
             return resultado;
         } else {
-            return ResultadoOperacao.criarErro("❌ Não foi possível cadastrar o ator");
+            return ResultadoOperacao.criarErro("Não foi possível cadastrar o ator");
         }
     }
 
@@ -261,7 +261,7 @@ public class CatalogoController {
     public ResultadoOperacao cadastrarDiretor(Diretor diretor) {
         // PASSO 1: Verificar se o diretor não é nulo
         if (diretor == null) {
-            return ResultadoOperacao.criarErro("❌ Erro: Diretor não pode ser nulo!");
+            return ResultadoOperacao.criarErro("Erro: Diretor não pode ser nulo!");
         }
         
         // PASSO 2: Tentar cadastrar usando diretorService
@@ -269,11 +269,11 @@ public class CatalogoController {
         
         // PASSO 3: Retornar resultado
         if (cadastrou) {
-            ResultadoOperacao resultado = ResultadoOperacao.criarSucesso("✅ Diretor cadastrado com sucesso!");
+            ResultadoOperacao resultado = ResultadoOperacao.criarSucesso("Diretor cadastrado com sucesso!");
             resultado.setDados(diretor);  // guardamos o diretor como dado extra
             return resultado;
         } else {
-            return ResultadoOperacao.criarErro("❌ Não foi possível cadastrar o diretor");
+            return ResultadoOperacao.criarErro("Não foi possível cadastrar o diretor");
         }
     }
 
@@ -292,18 +292,18 @@ public class CatalogoController {
     public ResultadoOperacao associarAtorFilme(Long filmeId, Long atorId) {
         // PASSO 1: Verificar se os IDs não são nulos
         if (filmeId == null || atorId == null) {
-            return ResultadoOperacao.criarErro("❌ Erro: IDs do filme e ator não podem ser nulos!");
+            return ResultadoOperacao.criarErro("Erro: IDs do filme e ator não podem ser nulos!");
         }
         
         // PASSO 2: Verificar se filme e ator existem
         Filme filme = filmeService.buscarPorId(filmeId);
         if (filme == null) {
-            return ResultadoOperacao.criarErro("❌ Erro: Filme não encontrado!");
+            return ResultadoOperacao.criarErro("Erro: Filme não encontrado!");
         }
         
         Ator ator = atorService.buscarPorId(atorId);
         if (ator == null) {
-            return ResultadoOperacao.criarErro("❌ Erro: Ator não encontrado!");
+            return ResultadoOperacao.criarErro("Erro: Ator não encontrado!");
         }
         
         // PASSO 3: Fazer a associação
@@ -311,9 +311,9 @@ public class CatalogoController {
         
         // PASSO 4: Retornar resultado
         if (associou) {
-            return ResultadoOperacao.criarSucesso("✅ Ator associado ao filme com sucesso!");
+            return ResultadoOperacao.criarSucesso("Ator associado ao filme com sucesso!");
         } else {
-            return ResultadoOperacao.criarErro("❌ Não foi possível associar o ator ao filme");
+            return ResultadoOperacao.criarErro("Não foi possível associar o ator ao filme");
         }
     }
     
@@ -330,18 +330,18 @@ public class CatalogoController {
     public ResultadoOperacao associarDiretorFilme(Long filmeId, Long diretorId) {
         // PASSO 1: Verificar se os IDs não são nulos
         if (filmeId == null || diretorId == null) {
-            return ResultadoOperacao.criarErro("❌ Erro: IDs do filme e diretor não podem ser nulos!");
+            return ResultadoOperacao.criarErro("Erro: IDs do filme e diretor não podem ser nulos!");
         }
         
         // PASSO 2: Verificar se filme e diretor existem
         Filme filme = filmeService.buscarPorId(filmeId);
         if (filme == null) {
-            return ResultadoOperacao.criarErro("❌ Erro: Filme não encontrado!");
+            return ResultadoOperacao.criarErro("Erro: Filme não encontrado!");
         }
         
         Diretor diretor = diretorService.buscarPorId(diretorId);
         if (diretor == null) {
-            return ResultadoOperacao.criarErro("❌ Erro: Diretor não encontrado!");
+            return ResultadoOperacao.criarErro("Erro: Diretor não encontrado!");
         }
         
         // PASSO 3: Fazer a associação
@@ -349,9 +349,9 @@ public class CatalogoController {
         
         // PASSO 4: Retornar resultado
         if (associou) {
-            return ResultadoOperacao.criarSucesso("✅ Diretor associado ao filme com sucesso!");
+            return ResultadoOperacao.criarSucesso("Diretor associado ao filme com sucesso!");
         } else {
-            return ResultadoOperacao.criarErro("❌ Não foi possível associar o diretor ao filme");
+            return ResultadoOperacao.criarErro("Não foi possível associar o diretor ao filme");
         }
     }
 }
