@@ -209,7 +209,7 @@ public class CatalogoController {
         }
         
         // PASSO 3: Fazer a associação
-        boolean associou = filmeService.associarAtor(filmeId, atorId);
+        boolean associou = filmeService.associarAtor(filme, ator);
         
         // PASSO 4: Retornar resultado
         if (associou) {
@@ -237,7 +237,7 @@ public class CatalogoController {
         }
         
         // PASSO 3: Fazer a associação
-        boolean associou = filmeService.associarDiretor(filmeId, diretorId);
+        boolean associou = filmeService.associarDiretor(filme, diretor);
         
         // PASSO 4: Retornar resultado
         if (associou) {

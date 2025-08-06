@@ -1,6 +1,8 @@
 package service;
 
 import interfaces.ICrudOperations;
+import model.Ator;
+import model.Diretor;
 import model.Filme;
 
 import java.util.ArrayList;
@@ -102,23 +104,37 @@ public class FilmeService implements ICrudOperations<Filme> {
         return this.filmes.removeIf(filme -> Objects.equals(filme.getId(), id.intValue()));
     }
 
-    public boolean associarAtor(Long filmeId, Long atorId) {
-        // A implementação requer acesso ao AtorService para buscar o Ator pelo ID.
-        // Sem essa dependência, a associação não pode ser concluída.
+    public boolean associarAtor(Filme filme, Ator ator) {
+        // A busca não é mais necessária! A lógica é apenas a ação de associar.
+        if (filme != null && ator != null) {
+            filme.adicionarAtor(ator);
+            return true;
+        }
         return false;
     }
 
-    public boolean removerAtor(Long filmeId, Long atorId) {
-        // A implementação requer acesso ao AtorService para buscar o Ator pelo ID.
-        // Sem essa dependência, a remoção não pode ser concluída.
+    /**
+     * Remove a associação de um ator com um filme.
+     */
+    public boolean removerAtor(Filme filme, Ator ator) {
+        if (filme != null && ator != null) {
+            filme.removerAtor(ator);
+            return true;
+        }
         return false;
     }
 
-    public boolean associarDiretor(Long filmeId, Long diretorId) {
-        // A implementação requer acesso ao DiretorService para buscar o Diretor pelo ID.
-        // Sem essa dependência, a associação não pode ser concluída.
+    /**
+     * Associa um diretor a um filme.
+     */
+    public boolean associarDiretor(Filme filme, Diretor diretor) {
+        if (filme != null && diretor != null) {
+            filme.setDiretor(diretor);
+            return true;
+        }
         return false;
     }
+
 
     private boolean validarFilmeExiste(long id) {
         if (id <= 0) {
