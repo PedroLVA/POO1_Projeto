@@ -1,5 +1,6 @@
 package controller;
 
+import exception.PessoaNaoEncontradaException;
 import model.Ator;
 import model.Diretor;
 import model.Filme;
@@ -168,21 +169,6 @@ public class CatalogoController {
     /**
      * Cadastra um novo diretor
      */
-    public ResultadoOperacao cadastrarDiretor(Diretor diretor) {
-        if (diretor == null) {
-            return ResultadoOperacao.criarErro("Diretor não pode ser nulo!");
-        }
-        
-        boolean cadastrou = diretorService.cadastrar(diretor);
-        
-        if (cadastrou) {
-            ResultadoOperacao resultado = ResultadoOperacao.criarSucesso("Diretor cadastrado!");
-            resultado.setDados(diretor);
-            return resultado;
-        } else {
-            return ResultadoOperacao.criarErro("Erro ao cadastrar diretor");
-        }
-    }
 
     // ===== MÉTODOS PARA ASSOCIAÇÕES =====
     
@@ -241,6 +227,92 @@ public class CatalogoController {
             return ResultadoOperacao.criarSucesso("Diretor associado ao filme!");
         } else {
             return ResultadoOperacao.criarErro("Erro ao associar diretor");
+        }
+    }
+
+    public Ator buscarAtorPorId(int id) {
+        try {
+            return atorService.buscarPorId(id);
+        } catch (PessoaNaoEncontradaException e) {
+            // O controller pode optar por não propagar a exceção, retornando null.
+            return null;
+        }
+    }
+
+    /**
+     * Lista todos os atores cadastrados. (MÉTODO ADICIONADO)
+     * @return Uma lista de Atores.
+     */
+    public List<Ator> listarAtores() {
+        return atorService.listarTodos();
+    }
+
+    /**
+     * Remove um ator pelo seu ID. (MÉTODO ADICIONADO)
+     * @param id O ID do ator a ser removido.
+     * @return Um ResultadoOperacao indicando sucesso ou falha.
+     */
+    public ResultadoOperacao removerAtor(int id) {
+        if (id <= 0) {
+            return ResultadoOperacao.criarErro("ID do ator inválido!");
+        }
+        if (atorService.remover(id)) {
+            return ResultadoOperacao.criarSucesso("Ator removido com sucesso!");
+        } else {
+            return ResultadoOperacao.criarErro("Erro ao remover ator. ID não encontrado.");
+        }
+    }
+
+
+    // ===== MÉTODOS PARA DIRETORES (Originais + Expansão) =====
+    /**
+     * Cadastra um novo diretor
+     */
+    public ResultadoOperacao cadastrarDiretor(Diretor diretor) {
+        if (diretor == null) {
+            return ResultadoOperacao.criarErro("Diretor não pode ser nulo!");
+        }
+        boolean cadastrou = diretorService.cadastrar(diretor);
+        if (cadastrou) {
+            ResultadoOperacao resultado = ResultadoOperacao.criarSucesso("Diretor cadastrado com sucesso!");
+            resultado.setDados(diretor);
+            return resultado;
+        } else {
+            return ResultadoOperacao.criarErro("Erro ao cadastrar diretor. Verifique os dados.");
+        }
+    }
+
+    /**
+     * Busca um diretor pelo seu ID. (MÉTODO ADICIONADO)
+     * @param id O ID do diretor.
+     * @return O Diretor encontrado ou null.
+     */
+    public Diretor buscarDiretorPorId(int id) {
+        // O service de diretor já retorna null se não encontrar, então não precisa de try-catch.
+        return diretorService.buscarPorId(id);
+    }
+
+    /**
+     * Lista todos os diretores cadastrados. (MÉTODO ADICIONADO)
+     * @return Uma lista de Diretores.
+     */
+    public List<Diretor> listarDiretores() {
+        return diretorService.listarTodos();
+    }
+
+    /**
+     * Remove um diretor pelo seu ID. (MÉTODO ADICIONADO)
+     * @param id O ID do diretor a ser removido.
+     * @return Um ResultadoOperacao indicando sucesso ou falha.
+     */
+    public ResultadoOperacao removerDiretor(int id) {
+        if (id <= 0) {
+            return ResultadoOperacao.criarErro("ID do diretor inválido!");
+        }
+        if (diretorService.remover(id)) {
+            return ResultadoOperacao.criarSucesso("Diretor removido com sucesso!");
+        } else {
+            return ResultadoOperacao.criarErro("Erro ao remover diretor. ID não encontrado.");
         }
     }
 }
