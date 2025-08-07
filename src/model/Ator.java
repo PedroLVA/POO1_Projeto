@@ -20,8 +20,8 @@ public class Ator extends Pessoa {
     private List<Filme> filmografia; // Lista de filmes onde o ator participou
 
     // ===== CONSTRUTOR ===
-    public Ator(String nome) {
-        super(nome);  // Chama o construtor da classe pai (Pessoa)
+    public Ator(String nome, Integer idade, String nacionalidade) {
+        super(nome, idade, nacionalidade);  // Chama o construtor da classe pai (Pessoa)
         this.filmografia = new ArrayList<>();  // Inicializa a lista vazia
     }
 

@@ -35,7 +35,7 @@ public abstract class Pessoa {
      * Quando criamos uma pessoa (ator ou diretor), ela automaticamente
      * recebe um número único de identificação.
      */
-    public Pessoa(String nome) {
+    public Pessoa(String nome, Integer idade, String nacionalidade) {
         // VALIDAÇÃO: Verificar se o nome não é null ou vazio
         if (nome == null || nome.trim().isEmpty()) {
             throw new IllegalArgumentException("Erro: Nome da pessoa não pode ser null ou vazio!");
@@ -43,6 +43,8 @@ public abstract class Pessoa {
         
         this.id = proximoId++;  // Pega o próximo número disponível
         this.nome = nome.trim(); // Remove espaços em branco e define o nome
+        this.idade = idade;
+        this.nacionalidade = nacionalidade;
     }
 
     // ===== MÉTODOS ABSTRATOS =====

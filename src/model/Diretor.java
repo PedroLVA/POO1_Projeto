@@ -22,8 +22,9 @@ public class Diretor extends Pessoa {
     private List<Filme> filmesDirigidos; // Lista de filmes que o diretor dirigiu
 
     // ===== CONSTRUTOR =====
-    public Diretor(String nome) {
-        super(nome);  // Chama o construtor da classe pai (Pessoa)
+    public Diretor(String nome, Integer idade, String nacionalidade, String estilo) {
+        super(nome, idade, nacionalidade);  // Chama o construtor da classe pai (Pessoa)
+        this.estilo = estilo;
         this.filmesDirigidos = new ArrayList<>();  // Inicializa a lista vazia
     }
 
