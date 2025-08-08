@@ -33,10 +33,8 @@ public class CatalogoController {
         System.out.println("CatalogoController criado!");
     }
 
-    // ========== MÉTODOS PÚBLICOS QUE SEGUEM O PADRÃO FACADE ==========
-    /**
-     * Cadastra um ator usando apenas parâmetros primitivos (padrão Facade)
-     */
+    // ========== MÉTODOS PÚBLICOS QUE SEGUEM O PADRÃO FACADE -->  usar apenas parâmetros primitivos (padrão Facade)==========
+    
     public String cadastrarAtorString(String nome, int idade, String nacionalidade) {
         if (nome == null || nome.trim().isEmpty()) {
             return "Nome do ator não pode ser vazio!";
@@ -55,9 +53,6 @@ public class CatalogoController {
             return "Erro ao criar ator: " + e.getMessage();
         }
     }
-    /**
-     * Cadastra um diretor usando apenas parâmetros primitivos (padrão Facade)
-     */
     public String cadastrarDiretorString(String nome, int idade, String nacionalidade, String estilo) {
         if (nome == null || nome.trim().isEmpty()) {
             return "Nome do diretor não pode ser vazio!";
@@ -79,9 +74,6 @@ public class CatalogoController {
             return "Erro ao criar diretor: " + e.getMessage();
         }
     }
-    /**
-     * Cadastra um filme usando apenas parâmetros primitivos (padrão Facade)
-     */
     public String cadastrarFilmeString(String nome, String dataLancamento, String orcamento, String descricao) {
         if (nome == null || nome.trim().isEmpty()) {
             return "Nome do filme não pode ser vazio!";
@@ -102,9 +94,6 @@ public class CatalogoController {
             return "Erro ao criar filme: " + e.getMessage();
         }
     }
-    /**
-     * Edita um filme usando apenas parâmetros primitivos (padrão Facade)
-     */
     public String editarFilmeString(int id, String nome, String dataLancamento, String orcamento, String descricao) {
         if (id <= 0) {
             return "ID do filme inválido!";
@@ -135,9 +124,6 @@ public class CatalogoController {
             return "Erro ao atualizar filme: " + e.getMessage();
         }
     }
-    /**
-     * Lista todos os atores (padrão Facade)
-     */
     public String listarAtoresString() {
         List<Ator> atores = atorService.listarTodos();
         if (atores != null && !atores.isEmpty()) {
@@ -146,9 +132,6 @@ public class CatalogoController {
             return "Nenhum ator cadastrado";
         }
     }
-    /**
-     * Lista todos os diretores (padrão Facade)
-     */
     public String listarDiretoresString() {
         List<Diretor> diretores = diretorService.listarTodos();
         if (diretores != null && !diretores.isEmpty()) {
@@ -157,9 +140,6 @@ public class CatalogoController {
             return "Nenhum diretor cadastrado";
         }
     }
-    /**
-     * Lista todos os filmes (padrão Facade)
-     */
     public String listarFilmesString() {
         List<Filme> filmes = filmeService.listarTodos();
         if (filmes != null && !filmes.isEmpty()) {
@@ -168,9 +148,6 @@ public class CatalogoController {
             return "Nenhum filme cadastrado";
         }
     }
-    /**
-     * Busca um ator por ID (padrão Facade)
-     */
     public String buscarAtorPorIdString(int id) {
         if (id <= 0) {
             return "ID do ator inválido";
@@ -183,9 +160,6 @@ public class CatalogoController {
             return "Erro ao buscar ator: " + e.getMessage();
         }
     }
-    /**
-     * Busca um diretor por ID (padrão Facade)
-     */
     public String buscarDiretorPorIdString(int id) {
         if (id <= 0) {
             return "ID do diretor inválido";
@@ -194,9 +168,6 @@ public class CatalogoController {
         Diretor diretor = diretorService.buscarPorId(id);
         return diretor != null ? "Diretor encontrado: " + diretor.getNome() : "Diretor ID " + id + " não encontrado";
     }
-    /**
-     * Visualiza detalhes de um filme por ID (padrão Facade)
-     */
     public String visualizarDetalhesFilmeString(int id) {
         if (id <= 0) {
             return "ID do filme inválido";
@@ -205,9 +176,6 @@ public class CatalogoController {
         Filme filme = filmeService.buscarPorId(id);
         return filme != null ? "Filme encontrado: " + filme.getNome() : "Filme ID " + id + " não encontrado";
     }
-    /**
-     * Associa um ator a um filme (padrão Facade)
-     */
     public String associarAtorFilmeString(int filmeId, int atorId) {
         if (filmeId <= 0 || atorId <= 0) {
             return "IDs inválidos!";
@@ -230,9 +198,6 @@ public class CatalogoController {
             return "Erro ao buscar ator: " + e.getMessage();
         }
     }
-    /**
-     * Associa um diretor a um filme (padrão Facade)
-     */
     public String associarDiretorFilmeString(int filmeId, int diretorId) {
         if (filmeId <= 0 || diretorId <= 0) {
             return "IDs inválidos!";
@@ -251,9 +216,6 @@ public class CatalogoController {
         boolean associou = filmeService.associarDiretor(filme, diretor);
         return associou ? "Diretor associado ao filme!" : "Erro ao associar diretor";
     }
-    /**
-     * Remove um ator de um filme (padrão Facade)
-     */
     public String removerAtorFilmeString(int filmeId, int atorId) {
         if (filmeId <= 0 || atorId <= 0) {
             return "IDs inválidos!";
@@ -276,9 +238,6 @@ public class CatalogoController {
             return "Erro ao buscar ator: " + e.getMessage();
         }
     }
-    /**
-     * Remove um ator (padrão Facade)
-     */
     public String removerAtorString(int id) {
         if (id <= 0) {
             return "ID do ator inválido!";
