@@ -1,331 +1,170 @@
-import exception.PessoaNaoEncontradaException;
-import model.Ator;
-import model.Diretor;
-import service.AtorService;
-import service.DiretorService;
-
-import java.util.List;
-import java.util.Scanner;
+import controller.CatalogoController;
 
 public class Main {
-    // Instância dos serviços que serão testados
-    private static final AtorService atorService = new AtorService();
-    private static final DiretorService diretorService = new DiretorService();
-    private static final Scanner scanner = new Scanner(System.in);
-
+    
     public static void main(String[] args) {
-        int opcao;
-        do {
-            exibirMenuPrincipal();
-            opcao = lerOpcao();
-
-            switch (opcao) {
-                case 1:
-                    gerenciarAtores();
-                    break;
-                case 2:
-                    gerenciarDiretores();
-                    break;
-                case 0:
-                    System.out.println("Encerrando o sistema...");
-                    break;
-                default:
-                    System.out.println("Opção inválida. Tente novamente.");
-            }
-        } while (opcao != 0);
-
-        scanner.close();
+        System.out.println("TESTE DO SISTEMA DE CATÁLOGO DE FILMES ");
+        System.out.println("================================================");
+        
+        CatalogoController controller = new CatalogoController();
+        
+        System.out.println("\nTESTE 1: CADASTRANDO ATORES");
+        System.out.println("--------------------------------");
+        testarCadastroAtores(controller);
+        
+        System.out.println("\nTESTE 2: CADASTRANDO DIRETORES");
+        System.out.println("-----------------------------------");
+        testarCadastroDiretores(controller);
+        
+        System.out.println("\nTESTE 3: CADASTRANDO FILMES");
+        System.out.println("--------------------------------");
+        testarCadastroFilmes(controller);
+        
+        System.out.println("\nTESTE 4: LISTANDO TODOS");
+        System.out.println("----------------------------");
+        testarListagem(controller);
+        
+        System.out.println("\nTESTE 5: BUSCANDO POR ID");
+        System.out.println("-----------------------------");
+        testarBuscaPorId(controller);
+        
+        System.out.println("\nTESTE 6: TESTANDO ASSOCIAÇÕES");
+        System.out.println("----------------------------------");
+        testarAssociacoes(controller);
+        
+        System.out.println("\nTESTE 7: TESTANDO PESQUISAS");
+        System.out.println("--------------------------------");
+        testarPesquisas(controller);
+        
+        System.out.println("\nTESTE 8: TESTANDO ATUALIZAÇÕES");
+        System.out.println("-----------------------------------");
+        testarAtualizacoes(controller);
+        
+        System.out.println("\nTESTE 9: TESTANDO REMOÇÕES");
+        System.out.println("--------------------------------");
+        testarRemocoes(controller);
+        
+        System.out.println("\nTESTE 10: TESTANDO VALIDAÇÕES");
+        System.out.println("-----------------------------------");
+        testarValidacoes(controller);
+        
+        System.out.println("\nTODOS OS TESTES CONCLUÍDOS!");
+        System.out.println("Sistema funcionando corretamente! ");
     }
-
-    private static void exibirMenuPrincipal() {
-        System.out.println("\n===== MENU PRINCIPAL =====");
-        System.out.println("1. Gerenciar Atores");
-        System.out.println("2. Gerenciar Diretores");
-        System.out.println("0. Sair");
-        System.out.print("Escolha uma área para gerenciar: ");
+    
+    private static void testarCadastroAtores(CatalogoController controller) {
+        System.out.println("Cadastrando atores...");
+        
+        String resultado1 = controller.cadastrarAtorString("Leonardo DiCaprio", 48, "Estadunidense");
+        String resultado2 = controller.cadastrarAtorString("Kate Winslet", 48, "Britânica");
+        String resultado3 = controller.cadastrarAtorString("Tom Hanks", 67, "Estadunidense");
+        
+        System.out.println("Resultado 1: " + resultado1);
+        System.out.println("Resultado 2: " + resultado2);
+        System.out.println("Resultado 3: " + resultado3);
     }
-
-    // ========== LÓGICA PARA GERENCIAR ATORES ==========
-
-    private static void gerenciarAtores() {
-        int opcao;
-        do {
-            exibirMenuAtores();
-            opcao = lerOpcao();
-
-            switch (opcao) {
-                case 1:
-                    cadastrarAtor();
-                    break;
-                case 2:
-                    listarTodosAtores();
-                    break;
-                case 3:
-                    buscarAtorPorId();
-                    break;
-                case 4:
-                    buscarAtorPorNome();
-                    break;
-                case 5:
-                    atualizarAtor();
-                    break;
-                case 6:
-                    removerAtor();
-                    break;
-                case 0:
-                    System.out.println("Retornando ao menu principal...");
-                    break;
-                default:
-                    System.out.println("Opção inválida. Tente novamente.");
-            }
-        } while (opcao != 0);
+    
+    private static void testarCadastroDiretores(CatalogoController controller) {
+        System.out.println("Cadastrando diretores...");
+        
+        String resultado1 = controller.cadastrarDiretorString("James Cameron", 69, "Canadense", "Ação/Aventura");
+        String resultado2 = controller.cadastrarDiretorString("Steven Spielberg", 77, "Estadunidense", "Drama/Aventura");
+        
+        System.out.println("Resultado 1: " + resultado1);
+        System.out.println("Resultado 2: " + resultado2);
     }
-
-    private static void exibirMenuAtores() {
-        System.out.println("\n--- MENU DE ATORES ---");
-        System.out.println("1. Cadastrar Ator");
-        System.out.println("2. Listar Todos os Atores");
-        System.out.println("3. Buscar Ator por ID");
-        System.out.println("4. Buscar Ator por Nome");
-        System.out.println("5. Atualizar Ator");
-        System.out.println("6. Remover Ator");
-        System.out.println("0. Voltar ao Menu Principal");
-        System.out.print("Escolha uma opção: ");
+    
+    private static void testarCadastroFilmes(CatalogoController controller) {
+        System.out.println("Cadastrando filmes...");
+        
+        String resultado1 = controller.cadastrarFilmeString("Titanic", "1997-12-19", "200000000", "Um romance épico sobre o naufrágio do Titanic");
+        String resultado2 = controller.cadastrarFilmeString("Avatar", "2009-12-18", "237000000", "Uma aventura em um mundo alienígena");
+        String resultado3 = controller.cadastrarFilmeString("Forrest Gump", "1994-07-06", "55000000", "A história de um homem simples que vive momentos históricos");
+        
+        System.out.println("Resultado 1: " + resultado1);
+        System.out.println("Resultado 2: " + resultado2);
+        System.out.println("Resultado 3: " + resultado3);
     }
-
-    private static void cadastrarAtor() {
-        System.out.print("Digite o nome do ator: ");
-        String nome = scanner.nextLine();
-        Ator novoAtor = new Ator(nome); // Supondo que Ator herda de Pessoa
-        if (atorService.cadastrar(novoAtor)) {
-            System.out.println("Ator cadastrado com sucesso! ID atribuído: " + novoAtor.getId());
-        } else {
-            System.out.println("Falha ao cadastrar o ator. Verifique os dados.");
-        }
+    
+    private static void testarListagem(CatalogoController controller) {
+        System.out.println("Listando todos os registros...");
+        
+        String atores = controller.listarAtoresString();
+        System.out.println("Atores: " + atores);
+        
+        String diretores = controller.listarDiretoresString();
+        System.out.println("Diretores: " + diretores);
+        
+        String filmes = controller.listarFilmesString();
+        System.out.println("Filmes: " + filmes);
     }
-
-    private static void listarTodosAtores() {
-        System.out.println("\n--- LISTA DE ATORES ---");
-        List<Ator> atores = atorService.listarTodos();
-        if (atores.isEmpty()) {
-            System.out.println("Nenhum ator cadastrado.");
-        } else {
-            atores.forEach(System.out::println);
-        }
+    
+    private static void testarBuscaPorId(CatalogoController controller) {
+        System.out.println("Buscando por IDs...");
+        
+        String ator = controller.buscarAtorPorIdString(1);
+        System.out.println("Ator ID 1: " + ator);
+        
+        String diretor = controller.buscarDiretorPorIdString(1);
+        System.out.println("Diretor ID 1: " + diretor);
+        
+        String filme = controller.visualizarDetalhesFilmeString(1);
+        System.out.println("Filme ID 1: " + filme);
     }
-
-    private static void buscarAtorPorId() {
-        System.out.print("Digite o ID do ator: ");
-        long id = lerLong();
-        try {
-            Ator ator = atorService.buscarPorId(id);
-            System.out.println("Ator encontrado: " + ator);
-        } catch (PessoaNaoEncontradaException e) {
-            System.out.println(e.getMessage());
-        }
+    
+    private static void testarAssociacoes(CatalogoController controller) {
+        System.out.println("Testando associações...");
+        
+        String associacao1 = controller.associarAtorFilmeString(1, 1);
+        System.out.println("Associação Ator-Filme: " + associacao1);
+        
+        String associacao2 = controller.associarDiretorFilmeString(1, 1);
+        System.out.println("Associação Diretor-Filme: " + associacao2);
+        
+        controller.associarAtorFilmeString(1, 2);
+        controller.associarAtorFilmeString(2, 1);
+        controller.associarAtorFilmeString(3, 3);
+        
+        System.out.println("Associações adicionais realizadas!");
     }
-
-    private static void buscarAtorPorNome() {
-        System.out.print("Digite o nome exato do ator: ");
-        String nome = scanner.nextLine();
-        try {
-            Ator ator = atorService.buscarPorNome(nome);
-            System.out.println("Ator encontrado: " + ator);
-        } catch (PessoaNaoEncontradaException e) {
-            System.out.println(e.getMessage());
-        }
+    
+    private static void testarPesquisas(CatalogoController controller) {
+        System.out.println("Testando pesquisas...");
+        
+        String pesquisa1 = controller.pesquisarFilmePorNomeString("Titanic");
+        System.out.println("Pesquisa 'Titanic': " + pesquisa1);
+        
+        String pesquisa2 = controller.pesquisarFilmePorNomeString("Avatar");
+        System.out.println("Pesquisa 'Avatar': " + pesquisa2);
     }
-
-    private static void atualizarAtor() {
-        System.out.print("Digite o ID do ator que deseja atualizar: ");
-        long id = lerLong();
-        try {
-            Ator atorExistente = atorService.buscarPorId(id);
-            System.out.println("Ator encontrado: " + atorExistente);
-            System.out.print("Digite o novo nome para o ator: ");
-            String novoNome = scanner.nextLine();
-            atorExistente.setNome(novoNome);
-            if (atorService.atualizar(atorExistente)) {
-                System.out.println("Ator atualizado com sucesso!");
-            } else {
-                System.out.println("Falha ao atualizar o ator.");
-            }
-        } catch (PessoaNaoEncontradaException e) {
-            System.out.println(e.getMessage());
-        }
+    
+    private static void testarAtualizacoes(CatalogoController controller) {
+        System.out.println("Testando atualizações...");
+        
+        String atualizacao = controller.editarFilmeString(1, "Titanic Atualizado", "1997-12-19", "200000000", "Um romance épico sobre o naufrágio do Titanic - Versão Atualizada");
+        System.out.println("Atualização: " + atualizacao);
     }
-
-    private static void removerAtor() {
-        System.out.print("Digite o ID do ator a ser removido: ");
-        long id = lerLong();
-        if (atorService.remover(id)) {
-            System.out.println("Ator removido com sucesso!");
-        } else {
-            // Este 'else' pode ser redundante se o serviço sempre lançar exceção ao não encontrar
-            System.out.println("Falha ao remover. Ator com ID " + id + " não encontrado.");
-        }
+    
+    private static void testarRemocoes(CatalogoController controller) {
+        System.out.println("Testando remoções...");
+        
+        String remocao1 = controller.removerAtorFilmeString(1, 2);
+        System.out.println("Remoção Ator-Filme: " + remocao1);
+        
+        String remocao2 = controller.removerAtorString(1);
+        System.out.println("Remoção Ator: " + remocao2);
     }
-
-
-    // ========== LÓGICA PARA GERENCIAR DIRETORES ==========
-
-    private static void gerenciarDiretores() {
-        int opcao;
-        do {
-            exibirMenuDiretores();
-            opcao = lerOpcao();
-
-            switch (opcao) {
-                case 1:
-                    cadastrarDiretor();
-                    break;
-                case 2:
-                    listarTodosDiretores();
-                    break;
-                case 3:
-                    buscarDiretorPorId();
-                    break;
-                case 4:
-                    buscarDiretorPorNome();
-                    break;
-                case 5:
-                    atualizarDiretor();
-                    break;
-                case 6:
-                    removerDiretor();
-                    break;
-                case 0:
-                    System.out.println("Retornando ao menu principal...");
-                    break;
-                default:
-                    System.out.println("Opção inválida. Tente novamente.");
-            }
-        } while (opcao != 0);
-    }
-
-    private static void exibirMenuDiretores() {
-        System.out.println("\n--- MENU DE DIRETORES ---");
-        System.out.println("1. Cadastrar Diretor");
-        System.out.println("2. Listar Todos os Diretores");
-        System.out.println("3. Buscar Diretor por ID");
-        System.out.println("4. Buscar Diretor por Nome");
-        System.out.println("5. Atualizar Diretor");
-        System.out.println("6. Remover Diretor");
-        System.out.println("0. Voltar ao Menu Principal");
-        System.out.print("Escolha uma opção: ");
-    }
-
-    private static void cadastrarDiretor() {
-        System.out.print("Digite o nome do diretor: ");
-        String nome = scanner.nextLine();
-        System.out.print("Digite o estilo do diretor (opcional): ");
-        String estilo = scanner.nextLine();
-
-        Diretor novoDiretor = new Diretor(nome);
-        if (estilo != null && !estilo.trim().isEmpty()) {
-            novoDiretor.setEstilo(estilo);
-        }
-
-        if (diretorService.cadastrar(novoDiretor)) {
-            System.out.println("Diretor cadastrado com sucesso! ID atribuído: " + novoDiretor.getId());
-        } else {
-            System.out.println("Falha ao cadastrar o diretor. Verifique os dados.");
-        }
-    }
-
-    private static void listarTodosDiretores() {
-        System.out.println("\n--- LISTA DE DIRETORES ---");
-        List<Diretor> diretores = diretorService.listarTodos();
-        if (diretores.isEmpty()) {
-            System.out.println("Nenhum diretor cadastrado.");
-        } else {
-            diretores.forEach(System.out::println);
-        }
-    }
-
-    private static void buscarDiretorPorId() {
-        System.out.print("Digite o ID do diretor: ");
-        long id = lerLong();
-        try {
-            Diretor diretor = diretorService.buscarPorId(id);
-            System.out.println("Diretor encontrado: " + diretor);
-        } catch (PessoaNaoEncontradaException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    private static void buscarDiretorPorNome() {
-        System.out.print("Digite o nome exato do diretor: ");
-        String nome = scanner.nextLine();
-        try {
-            Diretor diretor = diretorService.buscarPorNome(nome);
-            System.out.println("Diretor encontrado: " + diretor);
-        } catch (PessoaNaoEncontradaException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    private static void atualizarDiretor() {
-        System.out.print("Digite o ID do diretor que deseja atualizar: ");
-        long id = lerLong();
-        try {
-            Diretor diretorExistente = diretorService.buscarPorId(id);
-            System.out.println("Diretor encontrado: " + diretorExistente);
-            System.out.print("Digite o novo nome para o diretor: ");
-            String novoNome = scanner.nextLine();
-            System.out.print("Digite o novo estilo para o diretor: ");
-            String novoEstilo = scanner.nextLine();
-
-            diretorExistente.setNome(novoNome);
-            diretorExistente.setEstilo(novoEstilo);
-
-            if (diretorService.atualizar(diretorExistente)) {
-                System.out.println("Diretor atualizado com sucesso!");
-            } else {
-                System.out.println("Falha ao atualizar o diretor.");
-            }
-        } catch (PessoaNaoEncontradaException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    private static void removerDiretor() {
-        System.out.print("Digite o ID do diretor a ser removido: ");
-        long id = lerLong();
-        if (diretorService.remover(id)) {
-            System.out.println("Diretor removido com sucesso!");
-        } else {
-            System.out.println("Falha ao remover. Diretor com ID " + id + " não encontrado.");
-        }
-    }
-
-    // ========== MÉTODOS UTILITÁRIOS ==========
-
-    /**
-     * Lê um número inteiro do console, garantindo que a entrada é válida.
-     */
-    private static int lerOpcao() {
-        while (!scanner.hasNextInt()) {
-            System.out.println("Entrada inválida. Por favor, digite um número.");
-            scanner.next(); // Limpa o buffer do scanner
-            System.out.print("Escolha uma opção: ");
-        }
-        int opcao = scanner.nextInt();
-        scanner.nextLine(); // Consome a quebra de linha
-        return opcao;
-    }
-
-    /**
-     * Lê um número long do console, garantindo que a entrada é válida.
-     */
-    private static long lerLong() {
-        while (!scanner.hasNextLong()) {
-            System.out.println("Entrada inválida. Por favor, digite um número de ID válido.");
-            scanner.next(); // Limpa o buffer
-            System.out.print("Digite o ID: ");
-        }
-        long id = scanner.nextLong();
-        scanner.nextLine(); // Consome a quebra de linha
-        return id;
+    
+    private static void testarValidacoes(CatalogoController controller) {
+        System.out.println("Testando validações...");
+        
+        String resultado1 = controller.cadastrarAtorString("", 0, "");
+        System.out.println("Cadastro inválido: " + resultado1);
+        
+        String resultado2 = controller.buscarAtorPorIdString(-1);
+        System.out.println("Busca ID inválido: " + resultado2);
+        
+        String resultado3 = controller.associarAtorFilmeString(999, 999);
+        System.out.println("Associação IDs inválidos: " + resultado3);
     }
 }
