@@ -2,7 +2,7 @@
 
 ## 📊 Visão Geral
 
-Este diagrama de classes em PlantUML representa a arquitetura completa do **Sistema de Catálogo de Filmes**, destacando todos os princípios de **Programação Orientada a Objetos (POO)** e o **padrão Facade** implementados.
+Este diagrama de classes no PlantUML representa a arquitetura completa do **Sistema de Catálogo de Filmes**, destacando todos os princípios de **Programação Orientada a Objetos (POO)** e o **padrão Facade** implementados.
 
 ## 🎯 Como Usar o Diagrama
 
