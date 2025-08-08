@@ -1,6 +1,5 @@
 package controller;
 
-import exception.PessoaNaoEncontradaException;
 import model.Ator;
 import model.Diretor;
 import model.Filme;
@@ -9,310 +8,313 @@ import service.AtorService;
 import service.DiretorService;
 import service.FilmeService;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
  * CatalogoController - Classe principal que controla o sistema de filmes
  * 
- * Esta classe é como um "gerente" que organiza todas as operações.
- * Ela usa outras classes (services) para fazer o trabalho pesado.
- * 
  * Padrão: Facade (Fachada) - Centraliza operações e simplifica o uso
+ * 
+ * Esta classe implementa o padrão Facade fornecendo uma interface simplificada
+ * que esconde a complexidade dos serviços internos e modelos.
  */
 public class CatalogoController {
 
-    // ===== ATRIBUTOS =====
     private final FilmeService filmeService;
     private final AtorService atorService;
     private final DiretorService diretorService;
 
-    // ===== CONSTRUTOR =====
     public CatalogoController() {
         this.filmeService = new FilmeService();
         this.atorService = new AtorService();
         this.diretorService = new DiretorService();
-        System.out.println("CatalogoController criado!");
+        System.out.println("🎬 CatalogoController criado!");
     }
 
-    // ===== MÉTODOS PARA FILMES =====
-
-    /**
-     * Cadastra um novo filme
-     */
-    public ResultadoOperacao cadastrarFilme(Filme filme) {
-        if (filme == null) {
-            return ResultadoOperacao.criarErro("Filme não pode ser nulo!");
-        }
-        
-        boolean cadastrou = filmeService.cadastrar(filme);
-        
-        if (cadastrou) {
-            ResultadoOperacao resultado = ResultadoOperacao.criarSucesso("Filme cadastrado!");
-            resultado.setDados(filme);
-            return resultado;
-        } else {
-            return ResultadoOperacao.criarErro(" Erro ao cadastrar filme");
-        }
-    }
+    // ========== MÉTODOS PÚBLICOS QUE SEGUEM O PADRÃO FACADE ==========
     
     /**
-     * Busca filmes pelo nome
+     * Cadastra um ator usando apenas parâmetros primitivos (padrão Facade)
      */
-    public List<Filme> pesquisarFilmePorNome(String nome) {
+    public String cadastrarAtorString(String nome, int idade, String nacionalidade) {
         if (nome == null || nome.trim().isEmpty()) {
-            System.out.println("Nome do filme não pode ser vazio");
-            return null;
+            return "Nome do ator não pode ser vazio!";
         }
         
-        List<Filme> filmes = filmeService.buscarPorNome(nome);
-        
-        if (filmes != null && !filmes.isEmpty()) {
-            System.out.println("🎬 Encontrados " + filmes.size() + " filme(s)");
-        } else {
-            System.out.println("🔍 Nenhum filme encontrado: " + nome);
+        try {
+            Ator ator = new Ator(nome);
+            ator.setIdade(idade);
+            if (nacionalidade != null && !nacionalidade.trim().isEmpty()) {
+                ator.setNacionalidade(nacionalidade);
+            }
+            
+            boolean cadastrou = atorService.cadastrar(ator);
+            return cadastrou ? "Ator cadastrado!" : "Erro ao cadastrar ator";
+        } catch (Exception e) {
+            return "Erro ao criar ator: " + e.getMessage();
         }
-        
-        return filmes;
     }
     
     /**
-     * Lista todos os filmes
+     * Cadastra um diretor usando apenas parâmetros primitivos (padrão Facade)
      */
-    public List<Filme> listarFilmes() {
-        List<Filme> filmes = filmeService.listarTodos();
-        
-        if (filmes != null) {
-            System.out.println("📽️ Total: " + filmes.size() + " filme(s)");
-        } else {
-            System.out.println("📽️ Nenhum filme cadastrado");
+    public String cadastrarDiretorString(String nome, int idade, String nacionalidade, String estilo) {
+        if (nome == null || nome.trim().isEmpty()) {
+            return "Nome do diretor não pode ser vazio!";
         }
         
-        return filmes;
+        try {
+            Diretor diretor = new Diretor(nome);
+            diretor.setIdade(idade);
+            if (nacionalidade != null && !nacionalidade.trim().isEmpty()) {
+                diretor.setNacionalidade(nacionalidade);
+            }
+            if (estilo != null && !estilo.trim().isEmpty()) {
+                diretor.setEstilo(estilo);
+            }
+            
+            boolean cadastrou = diretorService.cadastrar(diretor);
+            return cadastrou ? "Diretor cadastrado!" : "Erro ao cadastrar diretor";
+        } catch (Exception e) {
+            return "Erro ao criar diretor: " + e.getMessage();
+        }
     }
     
     /**
-     * Mostra detalhes de um filme
+     * Cadastra um filme usando apenas parâmetros primitivos (padrão Facade)
      */
-    public Filme visualizarDetalhesFilme(int id) {
+    public String cadastrarFilmeString(String nome, String dataLancamento, String orcamento, String descricao) {
+        if (nome == null || nome.trim().isEmpty()) {
+            return "Nome do filme não pode ser vazio!";
+        }
+        
+        try {
+            Filme filme = new Filme(nome, LocalDate.parse(dataLancamento));
+            if (orcamento != null && !orcamento.trim().isEmpty()) {
+                filme.setOrcamento(new BigDecimal(orcamento));
+            }
+            if (descricao != null && !descricao.trim().isEmpty()) {
+                filme.setDescricao(descricao);
+            }
+            
+            boolean cadastrou = filmeService.cadastrar(filme);
+            return cadastrou ? "Filme cadastrado!" : "Erro ao cadastrar filme";
+        } catch (Exception e) {
+            return "Erro ao criar filme: " + e.getMessage();
+        }
+    }
+    
+    /**
+     * Edita um filme usando apenas parâmetros primitivos (padrão Facade)
+     */
+    public String editarFilmeString(int id, String nome, String dataLancamento, String orcamento, String descricao) {
         if (id <= 0) {
-            System.out.println("ID do filme inválido");
-            return null;
+            return "ID do filme inválido!";
+        }
+        
+        try {
+            Filme filmeExistente = filmeService.buscarPorId(id);
+            if (filmeExistente == null) {
+                return "Filme ID " + id + " não encontrado!";
+            }
+            
+            if (nome != null && !nome.trim().isEmpty()) {
+                filmeExistente.setNome(nome);
+            }
+            if (dataLancamento != null && !dataLancamento.trim().isEmpty()) {
+                filmeExistente.setDataLancamento(LocalDate.parse(dataLancamento));
+            }
+            if (orcamento != null && !orcamento.trim().isEmpty()) {
+                filmeExistente.setOrcamento(new BigDecimal(orcamento));
+            }
+            if (descricao != null && !descricao.trim().isEmpty()) {
+                filmeExistente.setDescricao(descricao);
+            }
+            
+            boolean atualizou = filmeService.atualizar(filmeExistente);
+            return atualizou ? "Filme atualizado!" : "Erro ao atualizar filme";
+        } catch (Exception e) {
+            return "Erro ao atualizar filme: " + e.getMessage();
+        }
+    }
+    
+    /**
+     * Lista todos os atores (padrão Facade)
+     */
+    public String listarAtoresString() {
+        List<Ator> atores = atorService.listarTodos();
+        if (atores != null && !atores.isEmpty()) {
+            return "🎭 Total: " + atores.size() + " ator(es)";
+        } else {
+            return "Nenhum ator cadastrado";
+        }
+    }
+    
+    /**
+     * Lista todos os diretores (padrão Facade)
+     */
+    public String listarDiretoresString() {
+        List<Diretor> diretores = diretorService.listarTodos();
+        if (diretores != null && !diretores.isEmpty()) {
+            return "Total: " + diretores.size() + " diretor(es)";
+        } else {
+            return "Nenhum diretor cadastrado";
+        }
+    }
+    
+    /**
+     * Lista todos os filmes (padrão Facade)
+     */
+    public String listarFilmesString() {
+        List<Filme> filmes = filmeService.listarTodos();
+        if (filmes != null && !filmes.isEmpty()) {
+            return "📽️ Total: " + filmes.size() + " filme(s)";
+        } else {
+            return "📽️ Nenhum filme cadastrado";
+        }
+    }
+    
+    /**
+     * Busca um ator por ID (padrão Facade)
+     */
+    public String buscarAtorPorIdString(int id) {
+        if (id <= 0) {
+            return "ID do ator inválido";
+        }
+        
+        try {
+            Ator ator = atorService.buscarPorId(id);
+            return ator != null ? "Ator encontrado: " + ator.getNome() : "Ator ID " + id + " não encontrado";
+        } catch (Exception e) {
+            return "Erro ao buscar ator: " + e.getMessage();
+        }
+    }
+    
+    /**
+     * Busca um diretor por ID (padrão Facade)
+     */
+    public String buscarDiretorPorIdString(int id) {
+        if (id <= 0) {
+            return "ID do diretor inválido";
+        }
+        
+        Diretor diretor = diretorService.buscarPorId(id);
+        return diretor != null ? "🎬 Diretor encontrado: " + diretor.getNome() : "Diretor ID " + id + " não encontrado";
+    }
+    
+    /**
+     * Visualiza detalhes de um filme por ID (padrão Facade)
+     */
+    public String visualizarDetalhesFilmeString(int id) {
+        if (id <= 0) {
+            return "ID do filme inválido";
         }
         
         Filme filme = filmeService.buscarPorId(id);
-        
-        if (filme != null) {
-            System.out.println("🎭 Filme: " + filme.getNome());
-        } else {
-            System.out.println("🔍 Filme ID " + id + " não encontrado");
-        }
-        
-        return filme;
+        return filme != null ? "Filme encontrado: " + filme.getNome() : "Filme ID " + id + " não encontrado";
     }
     
     /**
-     * Edita um filme
+     * Associa um ator a um filme (padrão Facade)
      */
-    public ResultadoOperacao editarFilme(Filme filme) {
-        if (filme == null) {
-            return ResultadoOperacao.criarErro("Filme não pode ser nulo!");
-        }
-        
-        boolean atualizou = filmeService.atualizar(filme);
-        
-        if (atualizou) {
-            return ResultadoOperacao.criarSucesso("Filme atualizado!");
-        } else {
-            return ResultadoOperacao.criarErro("Erro ao atualizar filme");
-        }
-    }
-    
-    /**
-     * Remove um filme
-     */
-    public ResultadoOperacao removerFilme(int id) {
-        if (id <= 0) {
-            return ResultadoOperacao.criarErro("ID do filme inválido!");
-        }
-        
-        boolean removeu = filmeService.remover(id);
-        
-        if (removeu) {
-            return ResultadoOperacao.criarSucesso("Filme removido!");
-        } else {
-            return ResultadoOperacao.criarErro("Erro ao remover filme");
-        }
-    }
-
-    // ===== MÉTODOS PARA ATORES =====
-    /**
-     * Cadastra um novo ator
-     */
-    public ResultadoOperacao cadastrarAtor(Ator ator) {
-        if (ator == null) {
-            return ResultadoOperacao.criarErro("Ator não pode ser nulo!");
-        }
-        
-        boolean cadastrou = atorService.cadastrar(ator);
-        
-        if (cadastrou) {
-            ResultadoOperacao resultado = ResultadoOperacao.criarSucesso("Ator cadastrado!");
-            resultado.setDados(ator);
-            return resultado;
-        } else {
-            return ResultadoOperacao.criarErro("Erro ao cadastrar ator");
-        }
-    }
-
-    // ===== MÉTODOS PARA DIRETORES =====
-    
-    /**
-     * Cadastra um novo diretor
-     */
-
-    // ===== MÉTODOS PARA ASSOCIAÇÕES =====
-    
-    /**
-     * Associa um ator a um filme
-     */
-    public ResultadoOperacao associarAtorFilme(int filmeId, int atorId) {
+    public String associarAtorFilmeString(int filmeId, int atorId) {
         if (filmeId <= 0 || atorId <= 0) {
-            return ResultadoOperacao.criarErro("IDs inválidos!");
+            return "IDs inválidos!";
         }
         
-        // Verificar se filme e ator existem
         Filme filme = filmeService.buscarPorId(filmeId);
         if (filme == null) {
-            return ResultadoOperacao.criarErro("Filme não encontrado!");
+            return "Filme não encontrado!";
         }
         
-        Ator ator = atorService.buscarPorId(atorId);
-        if (ator == null) {
-            return ResultadoOperacao.criarErro("Ator não encontrado!");
-        }
-        
-        // Fazer a associação
-        boolean associou = filmeService.associarAtor(filme, ator);
-        
-        if (associou) {
-            return ResultadoOperacao.criarSucesso("Ator associado ao filme!");
-        } else {
-            return ResultadoOperacao.criarErro("Erro ao associar ator");
+        try {
+            Ator ator = atorService.buscarPorId(atorId);
+            if (ator == null) {
+                return "Ator não encontrado!";
+            }
+            
+            boolean associou = filmeService.associarAtor(filme, ator);
+            return associou ? "Ator associado ao filme!" : "Erro ao associar ator";
+        } catch (Exception e) {
+            return "Erro ao buscar ator: " + e.getMessage();
         }
     }
     
     /**
-     * Associa um diretor a um filme
+     * Associa um diretor a um filme (padrão Facade)
      */
-    public ResultadoOperacao associarDiretorFilme(int filmeId, int diretorId) {
+    public String associarDiretorFilmeString(int filmeId, int diretorId) {
         if (filmeId <= 0 || diretorId <= 0) {
-            return ResultadoOperacao.criarErro("IDs inválidos!");
+            return "IDs inválidos!";
         }
         
-        // Verificar se filme e diretor existem
         Filme filme = filmeService.buscarPorId(filmeId);
         if (filme == null) {
-            return ResultadoOperacao.criarErro("Filme não encontrado!");
+            return "Filme não encontrado!";
         }
         
         Diretor diretor = diretorService.buscarPorId(diretorId);
         if (diretor == null) {
-            return ResultadoOperacao.criarErro("Diretor não encontrado!");
+            return "Diretor não encontrado!";
         }
         
-        // Fazer a associação
         boolean associou = filmeService.associarDiretor(filme, diretor);
+        return associou ? "Diretor associado ao filme!" : "Erro ao associar diretor";
+    }
+    
+    /**
+     * Remove um ator de um filme (padrão Facade)
+     */
+    public String removerAtorFilmeString(int filmeId, int atorId) {
+        if (filmeId <= 0 || atorId <= 0) {
+            return "IDs inválidos!";
+        }
         
-        if (associou) {
-            return ResultadoOperacao.criarSucesso("Diretor associado ao filme!");
-        } else {
-            return ResultadoOperacao.criarErro("Erro ao associar diretor");
+        Filme filme = filmeService.buscarPorId(filmeId);
+        if (filme == null) {
+            return "Filme não encontrado!";
         }
-    }
-
-    public Ator buscarAtorPorId(int id) {
+        
         try {
-            return atorService.buscarPorId(id);
-        } catch (PessoaNaoEncontradaException e) {
-            // O controller pode optar por não propagar a exceção, retornando null.
-            return null;
+            Ator ator = atorService.buscarPorId(atorId);
+            if (ator == null) {
+                return "Ator não encontrado!";
+            }
+            
+            boolean removeu = filmeService.removerAtor(filme, ator);
+            return removeu ? "Ator removido do filme!" : "Erro ao remover ator do filme";
+        } catch (Exception e) {
+            return "Erro ao buscar ator: " + e.getMessage();
         }
     }
-
+    
     /**
-     * Lista todos os atores cadastrados. (MÉTODO ADICIONADO)
-     * @return Uma lista de Atores.
+     * Remove um ator (padrão Facade)
      */
-    public List<Ator> listarAtores() {
-        return atorService.listarTodos();
-    }
-
-    /**
-     * Remove um ator pelo seu ID. (MÉTODO ADICIONADO)
-     * @param id O ID do ator a ser removido.
-     * @return Um ResultadoOperacao indicando sucesso ou falha.
-     */
-    public ResultadoOperacao removerAtor(int id) {
+    public String removerAtorString(int id) {
         if (id <= 0) {
-            return ResultadoOperacao.criarErro("ID do ator inválido!");
+            return "ID do ator inválido!";
         }
-        if (atorService.remover(id)) {
-            return ResultadoOperacao.criarSucesso("Ator removido com sucesso!");
+        
+        boolean removeu = atorService.remover(id);
+        return removeu ? "Ator removido!" : "Erro ao remover ator";
+    }
+    
+    /**
+     * Pesquisa filmes por nome (padrão Facade)
+     */
+    public String pesquisarFilmePorNomeString(String nome) {
+        if (nome == null || nome.trim().isEmpty()) {
+            return "Nome do filme não pode ser vazio";
+        }
+        
+        List<Filme> filmes = filmeService.buscarPorNome(nome);
+        if (filmes != null && !filmes.isEmpty()) {
+            return "🎬 Encontrados " + filmes.size() + " filme(s)";
         } else {
-            return ResultadoOperacao.criarErro("Erro ao remover ator. ID não encontrado.");
-        }
-    }
-
-
-    // ===== MÉTODOS PARA DIRETORES (Originais + Expansão) =====
-    /**
-     * Cadastra um novo diretor
-     */
-    public ResultadoOperacao cadastrarDiretor(Diretor diretor) {
-        if (diretor == null) {
-            return ResultadoOperacao.criarErro("Diretor não pode ser nulo!");
-        }
-        boolean cadastrou = diretorService.cadastrar(diretor);
-        if (cadastrou) {
-            ResultadoOperacao resultado = ResultadoOperacao.criarSucesso("Diretor cadastrado com sucesso!");
-            resultado.setDados(diretor);
-            return resultado;
-        } else {
-            return ResultadoOperacao.criarErro("Erro ao cadastrar diretor. Verifique os dados.");
-        }
-    }
-
-    /**
-     * Busca um diretor pelo seu ID. (MÉTODO ADICIONADO)
-     * @param id O ID do diretor.
-     * @return O Diretor encontrado ou null.
-     */
-    public Diretor buscarDiretorPorId(int id) {
-        // O service de diretor já retorna null se não encontrar, então não precisa de try-catch.
-        return diretorService.buscarPorId(id);
-    }
-
-    /**
-     * Lista todos os diretores cadastrados. (MÉTODO ADICIONADO)
-     * @return Uma lista de Diretores.
-     */
-    public List<Diretor> listarDiretores() {
-        return diretorService.listarTodos();
-    }
-
-    /**
-     * Remove um diretor pelo seu ID. (MÉTODO ADICIONADO)
-     * @param id O ID do diretor a ser removido.
-     * @return Um ResultadoOperacao indicando sucesso ou falha.
-     */
-    public ResultadoOperacao removerDiretor(int id) {
-        if (id <= 0) {
-            return ResultadoOperacao.criarErro("ID do diretor inválido!");
-        }
-        if (diretorService.remover(id)) {
-            return ResultadoOperacao.criarSucesso("Diretor removido com sucesso!");
-        } else {
-            return ResultadoOperacao.criarErro("Erro ao remover diretor. ID não encontrado.");
+            return "🔍 Nenhum filme encontrado: " + nome;
         }
     }
 }
