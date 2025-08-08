@@ -46,7 +46,7 @@ https://tinyurl.com/3u58ywea
   - **IDE:** IntelliJ IDEA
   - **Controle de Versão:** Git e GitHub
   - **Organização:** Trello
-  - **diagramas UML** PlantUML
+  - **diagramas UML:** PlantUML
 
 
 ## 👥 Equipe e Contribuições
@@ -54,6 +54,7 @@ https://tinyurl.com/3u58ywea
 Este projeto foi desenvolvido com a colaboração dos seguintes integrantes:
   - [Elaine Fabiola Soares](https://github.com/elainefabiola)
   - [Pedro Athayde](https://github.com/PedroLVA)
+
 
 
 
