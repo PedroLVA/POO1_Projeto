@@ -170,9 +170,9 @@ public class CatalogoController {
     public String listarFilmesString() {
         List<Filme> filmes = filmeService.listarTodos();
         if (filmes != null && !filmes.isEmpty()) {
-            return "📽️ Total: " + filmes.size() + " filme(s)";
+            return "Total: " + filmes.size() + " filme(s)";
         } else {
-            return "📽️ Nenhum filme cadastrado";
+            return "Nenhum filme cadastrado";
         }
     }
     
@@ -201,7 +201,7 @@ public class CatalogoController {
         }
         
         Diretor diretor = diretorService.buscarPorId(id);
-        return diretor != null ? "🎬 Diretor encontrado: " + diretor.getNome() : "Diretor ID " + id + " não encontrado";
+        return diretor != null ? "Diretor encontrado: " + diretor.getNome() : "Diretor ID " + id + " não encontrado";
     }
     
     /**
