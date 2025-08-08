@@ -37,7 +37,7 @@ Este projeto foi estruturado para aplicar e demonstrar os quatro pilares fundame
 
 ## UML - Diagrama de Classes
 
-Abaixo está o diagrama de classes que representa a arquitetura do sistema:
+Diagrama de classes que representa a arquitetura do sistema:
 https://tinyurl.com/3u58ywea
 
 ## 🛠️ Tecnologias Utilizadas
@@ -53,6 +53,7 @@ https://tinyurl.com/3u58ywea
 Este projeto foi desenvolvido com a colaboração dos seguintes integrantes:
   - [Elaine Fabiola Soares](https://github.com/elainefabiola)
   - [Pedro Athayde](https://github.com/PedroLVA)
+
 
 
 
