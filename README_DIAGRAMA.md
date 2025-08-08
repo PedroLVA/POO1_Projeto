@@ -117,4 +117,4 @@ Filme o-- Diretor : "0..1 diretor"
 
 ---
 
-**Desenvolvido com PlantUML** - Uma ferramenta poderosa para diagramas UML baseados em texto.
+**Desenvolvido com PlantUML**
