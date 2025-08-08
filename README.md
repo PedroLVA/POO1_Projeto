@@ -42,7 +42,7 @@ https://tinyurl.com/3u58ywea
 
 ## 🛠️ Tecnologias Utilizadas
 
-  - **Linguagem:** Java (ou a linguagem que seu grupo escolher)
+  - **Linguagem:** Java
   - **IDE:** IntelliJ IDEA
   - **Controle de Versão:** Git e GitHub
   - **Organização:** Trello
@@ -54,6 +54,7 @@ https://tinyurl.com/3u58ywea
 Este projeto foi desenvolvido com a colaboração dos seguintes integrantes:
   - [Elaine Fabiola Soares](https://github.com/elainefabiola)
   - [Pedro Athayde](https://github.com/PedroLVA)
+
 
 
 
