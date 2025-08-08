@@ -141,7 +141,7 @@ public class CatalogoController {
     public String listarAtoresString() {
         List<Ator> atores = atorService.listarTodos();
         if (atores != null && !atores.isEmpty()) {
-            return "🎭 Total: " + atores.size() + " ator(es)";
+            return "Total: " + atores.size() + " ator(es)";
         } else {
             return "Nenhum ator cadastrado";
         }
@@ -297,9 +297,9 @@ public class CatalogoController {
         
         List<Filme> filmes = filmeService.buscarPorNome(nome);
         if (filmes != null && !filmes.isEmpty()) {
-            return "🎬 Encontrados " + filmes.size() + " filme(s)";
+            return "Encontrados " + filmes.size() + " filme(s)";
         } else {
-            return "🔍 Nenhum filme encontrado: " + nome;
+            return "Nenhum filme encontrado: " + nome;
         }
     }
 }
