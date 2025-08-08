@@ -246,9 +246,6 @@ public class CatalogoController {
         boolean removeu = atorService.remover(id);
         return removeu ? "Ator removido!" : "Erro ao remover ator";
     }
-    /**
-     * Pesquisa filmes por nome (padrão Facade)
-     */
     public String pesquisarFilmePorNomeString(String nome) {
         if (nome == null || nome.trim().isEmpty()) {
             return "Nome do filme não pode ser vazio";
