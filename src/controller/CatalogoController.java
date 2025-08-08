@@ -30,11 +30,10 @@ public class CatalogoController {
         this.filmeService = new FilmeService();
         this.atorService = new AtorService();
         this.diretorService = new DiretorService();
-        System.out.println("🎬 CatalogoController criado!");
+        System.out.println("CatalogoController criado!");
     }
 
     // ========== MÉTODOS PÚBLICOS QUE SEGUEM O PADRÃO FACADE ==========
-    
     /**
      * Cadastra um ator usando apenas parâmetros primitivos (padrão Facade)
      */
@@ -56,7 +55,6 @@ public class CatalogoController {
             return "Erro ao criar ator: " + e.getMessage();
         }
     }
-    
     /**
      * Cadastra um diretor usando apenas parâmetros primitivos (padrão Facade)
      */
@@ -81,7 +79,6 @@ public class CatalogoController {
             return "Erro ao criar diretor: " + e.getMessage();
         }
     }
-    
     /**
      * Cadastra um filme usando apenas parâmetros primitivos (padrão Facade)
      */
@@ -105,7 +102,6 @@ public class CatalogoController {
             return "Erro ao criar filme: " + e.getMessage();
         }
     }
-    
     /**
      * Edita um filme usando apenas parâmetros primitivos (padrão Facade)
      */
@@ -139,7 +135,6 @@ public class CatalogoController {
             return "Erro ao atualizar filme: " + e.getMessage();
         }
     }
-    
     /**
      * Lista todos os atores (padrão Facade)
      */
@@ -151,7 +146,6 @@ public class CatalogoController {
             return "Nenhum ator cadastrado";
         }
     }
-    
     /**
      * Lista todos os diretores (padrão Facade)
      */
@@ -163,7 +157,6 @@ public class CatalogoController {
             return "Nenhum diretor cadastrado";
         }
     }
-    
     /**
      * Lista todos os filmes (padrão Facade)
      */
@@ -175,7 +168,6 @@ public class CatalogoController {
             return "Nenhum filme cadastrado";
         }
     }
-    
     /**
      * Busca um ator por ID (padrão Facade)
      */
@@ -191,7 +183,6 @@ public class CatalogoController {
             return "Erro ao buscar ator: " + e.getMessage();
         }
     }
-    
     /**
      * Busca um diretor por ID (padrão Facade)
      */
@@ -203,7 +194,6 @@ public class CatalogoController {
         Diretor diretor = diretorService.buscarPorId(id);
         return diretor != null ? "Diretor encontrado: " + diretor.getNome() : "Diretor ID " + id + " não encontrado";
     }
-    
     /**
      * Visualiza detalhes de um filme por ID (padrão Facade)
      */
@@ -215,7 +205,6 @@ public class CatalogoController {
         Filme filme = filmeService.buscarPorId(id);
         return filme != null ? "Filme encontrado: " + filme.getNome() : "Filme ID " + id + " não encontrado";
     }
-    
     /**
      * Associa um ator a um filme (padrão Facade)
      */
@@ -241,7 +230,6 @@ public class CatalogoController {
             return "Erro ao buscar ator: " + e.getMessage();
         }
     }
-    
     /**
      * Associa um diretor a um filme (padrão Facade)
      */
@@ -263,7 +251,6 @@ public class CatalogoController {
         boolean associou = filmeService.associarDiretor(filme, diretor);
         return associou ? "Diretor associado ao filme!" : "Erro ao associar diretor";
     }
-    
     /**
      * Remove um ator de um filme (padrão Facade)
      */
@@ -289,7 +276,6 @@ public class CatalogoController {
             return "Erro ao buscar ator: " + e.getMessage();
         }
     }
-    
     /**
      * Remove um ator (padrão Facade)
      */
@@ -301,7 +287,6 @@ public class CatalogoController {
         boolean removeu = atorService.remover(id);
         return removeu ? "Ator removido!" : "Erro ao remover ator";
     }
-    
     /**
      * Pesquisa filmes por nome (padrão Facade)
      */
