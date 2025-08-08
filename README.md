@@ -52,10 +52,9 @@ Abaixo está o diagrama de classes que representa a arquitetura do sistema:
 ## 👥 Equipe e Contribuições
 
 Este projeto foi desenvolvido com a colaboração dos seguintes integrantes:
-
-  - [Lucas Alves](https://www.google.com/search?q=https://github.com/usuario2)
   - [Elaine Fabiola Soares](https://github.com/elainefabiola)
   - [Pedro Athayde](https://github.com/PedroLVA)
+
 
 
 
